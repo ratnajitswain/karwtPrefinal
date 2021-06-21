@@ -1,0 +1,253 @@
+<style>
+    .menubar {
+        width: 20px;
+        height: 3px;
+        background-color: black;
+        margin: 4px 0;
+        border-radius: 15%;
+    }
+
+
+
+    .profile-pic {
+    max-width: 200px;
+    max-height: 200px;
+    display: block;
+}
+
+.file-upload {
+    display: none;
+}
+.circle {
+    border-radius: 1000px !important;
+    overflow: hidden;
+    width: 128px;
+    height: 128px;
+    border: 8px solid rgba(255, 255, 255, 0.7);
+    position: absolute;
+    top: 72px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+.p-image {
+  position: absolute;
+  top: 167px;
+  right: 30px;
+  color: #666666;
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+.p-image:hover {
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+.upload-button {
+  font-size: 1.2em;
+}
+
+.upload-button:hover {
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+  color: #999;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
+}
+
+.profile-button {
+    background: #BA68C8;
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #682773
+}
+
+.profile-button:focus {
+    background: #682773;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #682773;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+</style>
+
+
+<header id="page-topbar">
+    <div class="navbar-header">
+        <div class="d-flex">
+            <!-- LOGO -->
+            <div class="navbar-brand-box">
+                <a href="#" class="logo logo-dark">
+                    <span class="logo-sm">
+                        <img src="/images/brand-logo.png" alt="" height="22">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="/images/brand-logo.png" alt="" height="17">
+                    </span>
+                </a>
+
+                <a href="#" class="logo logo-light">
+                    <span class="logo-sm">
+                        <img src="/images/brand-logo.png" alt="" height="22">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="/images/brand-logo.png" alt="" height="45">
+                    </span>
+                </a>
+            </div>
+            <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect vertical-menu-btn">
+                <div class="menubar"></div>
+                <div class="menubar"></div>
+                <div class="menubar"></div>
+            </button>
+
+        </div>
+        <div class="dropdown d-none d-md-block ms-2">
+
+            <h4> Welcome <%= result[0].username %></i></h4>
+        </div>
+        <div class="d-flex">
+
+
+
+
+
+            <div class="dropdown d-inline-block">
+
+                <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="rounded-circle header-profile-user" src="/uploads/userimages/<%= result[0].userimage == ''|| result[0].userimage == null ? 'profilephotodemo.ico': result[0].userimage %>"
+                        alt="Header Avatar">
+                </button>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <!-- item-->
+                    <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal"
+                        data-bs-target="#profileModal"><i
+                            class="fa fa-user font-size-17 text-muted align-middle me-1"></i> Profile</a>
+
+
+                    <!-- Modal -->
+
+
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="changePass()"><i
+                            class="fa fa-key"></i> Change
+                        Password</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="javascript:void(0)" onclick="logout()"><i
+                            class="fa fa-sign-out"></i> Logout</a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</header>
+
+
+<div class="modal fade" id="profileModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Profile</h4>
+            </div>
+            <div class="modal-body">
+                <form id="profileFormdata" enctype="multipart/form-data" method="post" name="profileFormdata">
+                <div class="row">
+                    <div class="col-md-4 border-right">
+                        <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img
+                                class="rounded-circle mt-5 profile-pic" src="/uploads/userimages/<%= result[0].userimage == ''|| result[0].userimage == null ? 'profilephotodemo.ico': result[0].userimage %>"
+                                width="90">
+                            <div class="p-image">
+                                <i class="fa fa-camera upload-button"></i>
+                                <input class="file-upload" type="file" name="profile-image" accept="image/*" />
+                            </div><span class="font-weight-bold"><%= result[0].username %></span><span
+                                class="text-black-50"><%= result[0].useremail %></span><span><%= result[0].userconst %>, <%= result[0].userdist %>, <%= result[0].userstate %> - <%= result[0].userpin %></span>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="p-3 py-5">
+                            
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="d-flex flex-row align-items-center back"><i class=" mr-1 mb-1"
+                                        aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                            height="16" fill="currentColor" class="bi bi-arrow-left"
+                                            viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                                        </svg></i>
+                                    <h6>Back to home</h6>
+                                </div>
+                                <h6 class="text-right">Edit Profile</h6>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6"><input type="text" class="form-control" name="name" placeholder="Enter Your Name"
+                                        value="<%= result[0].username %>"></div>
+                                <div class="col-md-6"><input type="text" class="form-control" name="pin" value="<%= result[0].userpin %>"
+                                        placeholder="PIN Code"></div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6"><input type="number" class="form-control" name="mobile" placeholder="Mobile"
+                                        value="<%= result[0].usermobile %>" disabled></div>
+                                <div class="col-md-6">
+
+
+                                    <select  id="states" name="state" onchange="fetchDist(this)"  class="form-control">
+                                        <option value="">--select--</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="d-none">
+                                <input class="dnoneform1" type="text" value="<%= result[0].userstate %>">
+                                <input class="dnoneform2" type="text" value="<%= result[0].userdist %>">
+                                <input class="dnoneform3" type="text" value="<%= result[0].userconst %>">
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6"><textarea type="text" class="form-control" name="address" placeholder="address"
+                                         style="height: 87px; margin-top: 0px; margin-bottom: 0px;"><%= result[0].useraddress %></textarea></div>
+                                <div class="col-md-6">
+                                    
+                                    <select  id="dists" name="dist" onchange="fetchConst(this)" class="form-control">
+                                        <option value="">--select--</option>
+                                        
+                                    </select>
+                                    <br>
+                                    <select id="consts" name="const" class="form-control" >
+                                        <option value="">--select--</option>
+                                        
+                                    </select>
+                                    </div>
+                            </div>
+                            
+                            <div class="mt-5 text-right"><button class="btn btn-primary profile-button"
+                                    type="button">Save Profile</button></div>
+
+
+                               
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
