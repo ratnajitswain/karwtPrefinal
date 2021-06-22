@@ -3,10 +3,11 @@ var dbService = require('../../src/services/dbService');
 const { base64encode, base64decode } = require('nodejs-base64');
 const { clearCache } = require('ejs');
 const DateFormatter = require('../Utils/CommonUtils');
+const { parse } = require('dotenv');
 const commonController = { 
 
     fetchAllStates: async function(req, res, next){  
-        result = {}
+       let result = {}
         try {
             let query = {  
                 text:'select * from tbl_states_mstr',
@@ -19,7 +20,7 @@ const commonController = {
         return result;
     },
     fetchDistByStateId: async function(req, res, next){  
-        result = {}
+       let result = {}
         let stateId = parseInt(req.query.id)
         
         try {
@@ -34,7 +35,7 @@ const commonController = {
         return result;
     },
     fetchConstByDistId: async function(req, res, next){  
-        result = {}
+        let result = []
         let distId = parseInt(req.query.id)
         
         try {
@@ -42,10 +43,21 @@ const commonController = {
                 text:'select * from tbl_const_mstr where "TCM_Dist" = $1',
                 values:[distId]
             }
+
             result = await dbService.execute(query)
+            console.log(result)
+            if(result.length == 0) {
+
+                
+            
+                let resp1 = await dbService.execute('select "TDM_Dist_Name" from tbl_dist_mstr where "TDM_Dist"='+parseInt(req.query.id))
+                result.push({TCM_Const_Name :resp1[0].TDM_Dist_Name,TCM_Const:'0'})
+               
+            }
         } catch (e) {
             console.log(e)
         }
+        
         return result;
     },
     otpsent: async function(req){
@@ -58,8 +70,8 @@ const commonController = {
          charactersLength)));
            }
            var otp =  result.join('');
-           resp.otp = base64encode(otp)
-
+           req.session.otp = base64encode(otp)
+           console.log(otp)
         var transporter = nodemailer.createTransport({
             host: 'mail.karwt.com',
     port: 465,
@@ -171,6 +183,7 @@ const commonController = {
             }
             var usertype = await dbService.execute(q)
             console.log(usertype)
+
              q1 = {  
                  text:`update login_detail set "Password"=$1 where "Email"=$2`,
                  values: [ base64encode(req.query.password),req.query.email]
@@ -210,7 +223,7 @@ const commonController = {
 
             if(req.session.userType=="user"||req.session.userType=="admin"){  
                 let q2 = {  
-                     text:`update tbl_user_mstr set "TUM_User_Name"=$1, "TUM_User_Image"=$2,"TUM_User_State"=$3,"TUM_User_District"=$4, "TUM_User_Constituency"=$5,"TUM_User_Address"=$6,"TUM_User_PINno"=$7 where "TUM_User_Email"=$8`,
+                     text:`update tbl_user_mstr set "TUM_User_Name"=$1, "TUM_User_Image"=$2,"TUM_User_State"=$3,"TUM_User_District"=$4, "TUM_User_Constituency"=$5,"TUM_User_Address"=$6,"TUM_User_PINno"=$7,"TUM_User_PINno"=$8 where "TUM_User_Email"=$9`,
                      values: [data.name,data.image,data.state,data.dist,data.const,data.address,data.pin,req.session.userEmail]
                  }
                 resp = await dbService.execute(q2)

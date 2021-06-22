@@ -22,7 +22,7 @@ router.get('/dashboard',async function (req, res){
 
                     result[0].totalPoints = parseInt(result[0].gen1)+parseInt(result[0].gen2)+parseInt(result[0].gen3)+parseInt(result[0].gen4)+parseInt(result[0].gen5)
                     result[0].totalRef = result[0].gen1
-                    result[0].refurl = process.env.URL+'?ref='+result[0].refid
+                    result[0].refurl = req.headers.host+'/'+result[0].refid
                     
                 }
 

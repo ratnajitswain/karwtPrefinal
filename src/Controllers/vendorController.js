@@ -49,17 +49,19 @@ const vendorController = {
                     values:[vendor.name,password,vendor.mobile,vendor.email,vendor.gst,vendor.businessName,vendor.businessType,vendor.productservice,parseInt(vendor.state),parseInt(vendor.dist),parseInt(vendor.constituency),vendor.address,vendor.pin1,parseInt(refu)]
                 }
                 resp =await dbService.executeUpdate(query)
-
-                let query1 = {  
-                    text:`INSERT INTO login_detail(
-                        "Email","Mobile", "Password", "User_Type")
-                        VALUES ($1, $2,$3,$4)`,
-                    values:[vendor.email,vendor.mobile,password,'vendor']
+                if(resp=='success'){  
+                    let query1 = {  
+                        text:`INSERT INTO login_detail(
+                            "Email","Mobile", "Password", "User_Type")
+                            VALUES ($1, $2,$3,$4)`,
+                        values:[vendor.email,vendor.mobile,password,'vendor']
+                    }
+                    let resp1 = await dbService.executeUpdate(query1)
                 }
-                let resp1 = await dbService.executeUpdate(query1)
+                
 
         }catch(e){  
-            console.log()
+            console.log(e)
         }
 
     

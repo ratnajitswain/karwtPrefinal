@@ -12,7 +12,7 @@ router.get('/dashboard',async function (req, res){
 let id = req.session.userid
 let total
 let  total1
-let  t
+let  total3
 try {
    let result1 =await adminController.getTotalRegisteredUsers();
   let result2 =await adminController.getRegisteredUsersForToday();
@@ -24,7 +24,7 @@ total = result1[0].count;
   total3 = result3.length;
 
     
-
+console.log(result1,result2)
 } catch (e) {
     console.log(e)
 }
@@ -44,20 +44,29 @@ router.get('/manageVendors',async function (req, res){
 
   router.get('/userChart',async function (req, res){  
       let resp = {  }
+      let resp1 = {}
       try {
           let query = {  
-              text:'select * from fetch_userRegdChart()'
+              text:`select * from fetch_userRegdChart('user')`
           }
           resp = await dbService.execute(query)
           resp.forEach((s)=>{  
-              s.date = DateFormatter.getStringDate(s.count_date)
-          })
+            s.date = DateFormatter.getStringDate(s.count_date)
+        })
+          let query1 = {  
+            text:`select * from fetch_userRegdChart('vendor')`
+        }
+        resp1 = await dbService.execute(query1)
+        resp1.forEach((s)=>{  
+            s.date = DateFormatter.getStringDate(s.count_date)
+        })
       } catch (e) {
           console.log(e)
       }
 
-      console.log('&&&&&&&',resp)
-      res.send(resp)
+      let result = [resp,resp1]
+      console.log('&&&&&&&',result)
+      res.send(result)
   })
 //   router.get('/fetchUserList',async function (req,res) {
   
@@ -141,7 +150,8 @@ router.get('/fetchUserList',async function (req, res){
                     
                 }
                 result[i].totalPoints = parseInt(result[i].gen2to5) + parseInt(result[i].gen1)
-                result[i].userref = '<a href="javascript:void();" onclick="fetch_refDetailsById(\''+result[i].userid+'\')"><i class="fa fa-plus"></i></a>'
+                result[i].userref = '<a href="javascript:void();" onclick="fetch_refDetailsById(\''+result[i].userid+'\')"><i class="fa fa-plus"></i></a>&nbsp&nbsp;<a href="javascript:void();" onclick="vendorRefBy(\''+result[i].userid+'\')"><i class="fas fa-store"></i></a>';
+
                 result[i].action = '&nbsp&nbsp;<a href="javascript:void();" onclick="viewUser(\''+result[i].userid+'\')"><i class="fa fa-search"></i></a>'+
                 '&nbsp&nbsp;<a href="javascript:void();" onclick="deleteUser(\''+result[i].useremail+'\')"><i class="fa fa-trash"></i></a>'; 
 
@@ -163,6 +173,19 @@ router.get('/fetchUserList',async function (req, res){
 console.log('**********************',result)
     res.json(result)
 })
+
+router.get('/fetch_vendorrefdetailsById',async function (req, res){  
+    var  resp={ }
+      let id = req.query.id
+      try {
+          resp = await userController.fetchVendorRefBy(id)
+      } catch (e) {
+          console.log(e)
+      }
+      resp.message = 'hghgjhgjhjdtgytddy'
+      console.log(resp)
+      res.send(resp)
+  })
 
 router.get('/fetch_refDetailsById',async function(req, res){  
     var result = {}

@@ -57,14 +57,18 @@ const userController = {
                     values: [user.name, password, user.mobile, user.email, parseInt(user.state), parseInt(user.dist),parseInt(user.constituency), user.address, user.pin, RefId, parseInt(refu)]
                 }
                 resp = await dbService.executeUpdate(query)
-                let query1 = {
-                    text: `INSERT INTO login_detail(
-                            "Email","Mobile", "Password", "User_Type")
-                            VALUES ($1, $2,$3,$4)`,
-                    values: [user.email,user.mobile, password, 'user']
+                if(resp == 'success'){  
+                    let query1 = {
+                        text: `INSERT INTO login_detail(
+                                "Email","Mobile", "Password", "User_Type")
+                                VALUES ($1, $2,$3,$4)`,
+                        values: [user.email,user.mobile, password, 'user']
+                    }
+                    let resp1 = await dbService.executeUpdate(query1)
+                    let resp2 = await mailService.sentEmail({email:user.email,message:'Dear '+user.name+',<br>Welcome to <h2>Karwt</h2> family.'})
+                    resp.message = 'success'
                 }
-                let resp1 = await dbService.executeUpdate(query1)
-                let resp2 = await mailService.sentEmail({email:user.email,message:'Dear '+user.name+',<br>Welcome to <h2>Karwt</h2> family.'})
+                
             } catch (e) {
                 console.log(e)
             }
@@ -143,6 +147,7 @@ fetchVendorRefBy: async function(id){
             values:[parseInt(id)]
         } 
         resp = await dbService.execute(query)
+        resp.message = 'success'
 
     } catch (e) {
         console.log(e)

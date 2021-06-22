@@ -63,7 +63,7 @@ const adminController = {
         try {
             let today = new Date().toISOString();
             let dateFunction = await DateFormatter.DateFormatter.getStringDate(today)
-            console.log('%%%%%%%%%%%%%%%%%%%%',dateFunction)
+        
             let query = {  
                 text:`select count(*) from login_detail where "Status" = 0 AND "DeletedFlag" = 0 AND TO_CHAR("CreatedOn" :: DATE, 'dd/mm/yyyy') = $1 AND "User_Type" = $2`,
                 values:[dateFunction,'user']

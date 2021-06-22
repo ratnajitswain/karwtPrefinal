@@ -6,11 +6,13 @@ var adminController = require('../src/Controllers/adminController')
 
 /* GET home page. */
 router.get('/',async function(req, res, next) {
-  req.session.refId = req.query.ref
-  res.render('index')
+  res.render("index")
 // res.send(states)
 
 })
+
+
+
 
 router.get('/about',async function(req, res, next){  
   res.render('about')
@@ -81,6 +83,23 @@ router.get('/fetchDistByStateId',async function(req, res, next) {
    } catch (e) {
      console.log(e)
    }
+   console.log(response)
+   res.send(response)
+ });
+ router.get('/otpcheck',async function(req, res, next) {
+  var response = {}
+  try{  
+    if(req.session.otp==base64encode(req.query.otp)){  
+      response.message =await 'success'
+    }else{  
+     response.message =await 'failed'
+      
+    }
+  }
+  catch(e){
+    console.log(e)
+  }
+   
    console.log(response)
    res.send(response)
  });

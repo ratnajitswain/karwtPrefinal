@@ -153,12 +153,13 @@ app.use("/admin/**",function(req,res,next){
 app.use('/logout', function(req, res, next) {
 
   if(req.session.userType){
-      req.session.user='';
-      req.session.userType = ''
+  
+      
       req.session.sessionFlash ={
       type:'success',
       message:"Log Out successfull"
     }
+    req.session.destroy()
     res.redirect('/'); 
   }else{
      req.session.sessionFlash ={
@@ -193,7 +194,9 @@ app.use('/admin/',adminRouter)
 
 //catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  console.log(req.url)
+  req.session.refId = (req.url).substring(1)
+  res.redirect('/')
 });
 
 // error handler

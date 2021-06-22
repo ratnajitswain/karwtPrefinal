@@ -284,7 +284,8 @@ async function changePass() {
 }
 function logout() {
     Swal.fire({
-        title: 'Do you want to Sign Out?',
+        title: 'Are you sure ?',
+        icon:'warning',
         showDenyButton: true,
         showCancelButton: false,
         confirmButtonText: `Yes`,
@@ -327,4 +328,15 @@ function logout() {
             Swal.fire('Thank You!', '', 'success')
         }
     })
+}
+
+
+function numberValid(e){ 
+ 
+    
+        var value = $('#'+e.id).val();
+        if(isNaN(value)){  
+            $('#'+e.id).val(value.slice(0, -1))
+        }
+   
 }

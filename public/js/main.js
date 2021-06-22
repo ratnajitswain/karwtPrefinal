@@ -1,5 +1,5 @@
 jQuery(function ($) {
-
+    $('body').append('<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>')
     /*-- Strict mode enabled --*/
     "use strict";
     $.ajax({
@@ -18,8 +18,7 @@ jQuery(function ($) {
 
         `
      
-        <a class=" " style="color:#3023AE" data-toggle="modal" data-target="#myModal">
-                </a>
+        
 
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
               aria-hidden="true">
@@ -78,8 +77,8 @@ jQuery(function ($) {
                           <div class="tab-pane" id="Registration">
                           <form role="form" class="form-horizontal" id="userRegistration" autocomplete="off">
                       
-                              <div class="row g-3" >
-                                  <div class="col-6">
+                              <div class="row g-3 form_rowch" >
+                                  <div class="col-xl-6 col-md-12">
                                       <div class="row" >
                       
                                           <div class="col-sm-12">
@@ -108,7 +107,7 @@ jQuery(function ($) {
                                               <div class="form-group">
                                                   <label for="mobile" class="col-sm-2 control-label">
                                                       Mobile</label>
-                                                  <input type="text" id="mobile"   name="mobile" class="form-control" id="mobile" maxlength="10" placeholder="+91" />
+                                                  <input type="text" id="mobile"  onkeyup="numberValid(this)" name="mobile" class="form-control"  maxlength="10" placeholder="+91" />
                                               </div>
                                           </div>
                       
@@ -132,7 +131,7 @@ jQuery(function ($) {
                                   </div>
                       
                       
-                                  <div class="col-6">
+                                  <div class="col-xl-6 col-md-12">
                                       <div class="row">
                                           <div class="col-sm-12">
                       
@@ -169,8 +168,8 @@ jQuery(function ($) {
                                           <div class="col-sm-12">
                       
                                               <div class="form-group">
-                                                  <label for="pin">PIN No.</label>
-                                                  <input type="text" name="pin" class="form-control" maxlength="6" id="pin">
+                                                  <label for="pin">PIN Code</label>
+                                                  <input type="text" name="pin" onkeyup="numberValid(this)" class="form-control" maxlength="6" id="pin">
                                               </div>
                                           </div>
                       
@@ -190,11 +189,12 @@ jQuery(function ($) {
                                   </div>
                       
                                   <div class="row">
-                                      <div class="col-sm-2">
-                                      </div>
-                                      <div class="col-sm-10">
+                                      
+                                      <div class="col-6">
                                           <button type="button" id="signup" class="btn btn-primary btn-sm">
                                               Sign Up</button>
+                                              </div>
+                                              <div class="col-6">
                                           <button type="reset" class="btn btn-default btn-sm">
                                               Cancel</button>
                       
@@ -207,8 +207,8 @@ jQuery(function ($) {
                       <div class="tab-pane" id="VRegistration">
                       <form role="form" class="form-horizontal" id="vendorRegistration" autocomplete="off">
                   
-                          <div class="row g-3">
-                              <div class="col-6">
+                          <div class="row g-3 form_rowch">
+                              <div class="col-xl-6 col-md-12">
                                   <div class="row" >
                   
                                   <div class="col-sm-12">
@@ -231,7 +231,7 @@ jQuery(function ($) {
                                           <div class="form-group">
                                               <label for="mobile" class="control-label">
                                                 Mobile</label>
-                                              <input type="text" class="form-control" id="mobile1" name="mobile" maxlength="10" placeholder="+91" />
+                                              <input type="text" onkeyup="numberValid(this)" class="form-control" id="mobile1" name="mobile" maxlength="10" placeholder="+91" />
                                           </div>
                                       </div>
 
@@ -271,7 +271,7 @@ jQuery(function ($) {
                               </div>
                   
                   
-                              <div class="col-6">
+                              <div class="col-xl-6 col-md-12">
                                   <div class="row">
 
 
@@ -339,7 +339,7 @@ jQuery(function ($) {
                   
                                           <div class="form-group">
                                               <label for="pin">PIN Code</label>
-                                              <input type="text" class="form-control" maxlength="6" id="pin1">
+                                              <input type="text" onkeyup="numberValid(this)" class="form-control" maxlength="6" id="pin1">
                                           </div>
                                       </div>
                   
@@ -359,12 +359,12 @@ jQuery(function ($) {
                               </div>
                   
                               <div class="row">
-                                  <div class="col-sm-2">
-                                  </div>
-                                  <div class="col-sm-10">
-                                      <button type="button" id="signup1" class="btn btn-primary btn-sm">Register</button>
-                                      <button type="reset" class="btn btn-default btn-sm">
-                                          Cancel</button>
+                                 
+                              <div class="col-6 ">
+                                      <button type="button" id="signup1" class="btn btn-primary btn-sm">Register</button></div>
+                                      <div class="col-6"><button type="reset" class="btn btn-default btn-sm">
+                                      Cancel</button>
+                                      
                   
                                   </div>
                                   </div>
@@ -384,10 +384,11 @@ jQuery(function ($) {
     $('#loginnav').html($(login));
 
     var buyNow = `
-    
+    <div id="btncalc">
     <button type="button" id = "fullcalc" class="btn btn-fixed" data-toggle="modal" data-target="#calcModal"><i class="fa fa-calculator" aria-hidden="true"></i>Open Calculator</button>
     
     <button type="button" id = "halfcalc" class="btn btn-fixed" data-toggle="modal" data-target="#calcModal"><i class="fa fa-calculator" aria-hidden="true"></i></button>
+    </div>
     <div class="modal fade" id="calcModal" tabindex="-1" role="dialog" aria-labelledby="calcModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -432,6 +433,8 @@ jQuery(function ($) {
         'bottom': '25px',
         'z-index': '9999'
     });
+
+    
 
     $('#calculate').on('click', function () {
 
@@ -750,8 +753,10 @@ jQuery(function ($) {
     
 
     if (x != true) {
+       
 
             verifyEmail(data)
+              
     }
         }
 
@@ -795,7 +800,10 @@ jQuery(function ($) {
     
 
             if (x != true) {
-            verifyEmail1(data)
+            
+                verifyEmail1(data)
+              
+            
             }
         }
 
@@ -940,7 +948,12 @@ jQuery(function ($) {
         var w = 0,
             t = setInterval(function () {
                 w = w + 1;
-                inner.text(w + '%');
+                inner.html(`
+                
+                <img class= "tada" src="/images/KARWT_Psd_fi.png">
+                <img class= "lightSpeedIn" src="/images/karwttext.png">
+                
+                `);
                 if (w === 100) {
                     obj.addClass('open-page');
                     obj.addClass('hide-loader');
@@ -973,7 +986,7 @@ jQuery(function ($) {
     
                 <div class="col-sm-10">
                 <div class="form-group">
-                     <label for="email"  control-label">
+                     <label for="email"  class="control-label">
                             Enter OTP sent to ${email}</label>
                           
                         <input type="text" id="otp" name="otp" class="form-control" placeholder="Enter OTP" />
@@ -982,7 +995,7 @@ jQuery(function ($) {
                         </div>
                         </div>
                         <div class="col-sm-12">
-                        <div class="row w-100">
+                        <div class="row">
                         <div class="col-6">
                         <button type="button" id="verifyOTP" class="btn btn-primary" >Verify OTP</button>
                         </div>
@@ -994,11 +1007,12 @@ jQuery(function ($) {
                 var fiveMinutes = 60 * 2,
                     display = $('#time');
                 startTimer(fiveMinutes, display, data,'2');
-                $('#verifyOTP').on('click', function (e) {
+                $('#verifyOTP').on('click',async function (e) {
 
-                    
+                    var otpchk = await otpcheck($('#otp').val() )
+               
 
-                    if ($('#otp').val() == window.atob(res.otp)) {
+                    if (otpchk == true) {
 
                         $.ajax({
                             url: '/users/createVendor',
@@ -1007,12 +1021,13 @@ jQuery(function ($) {
                             dataType: 'json',
                             success: function (res) {
 
-                                $('#vendorRegistration').html('')
-                                $('#vendorRegistration').html(`
-                                <div class="col-sm-10">
-                                <h4>Registration successfull</h4>
-                                <a href="/"> click here</a> <p> to login</p>
-                                `)
+                                if(res.message== 'success'){  
+                                    Swal.fire('Registration Sucessful', '', 'success').then((result)=>{  
+                                        if(result.isConfirmed){  
+                                            location.reload()
+                                        }
+                                    })
+                                }
                             },
                             error: function (e) {
                                 console.log(e)
@@ -1049,8 +1064,32 @@ jQuery(function ($) {
         })
     }
 
+    
 
-
+    $('#myModal').on('show.bs.modal', function (e) {
+    $('#btncalc').hide()
+    
+    var $window = $(window), previousScrollTop = 0, scrollLock = true;
+    $window.scroll(function(event) {     
+        if(scrollLock) {
+            $window.scrollTop(previousScrollTop); 
+        }
+    
+        previousScrollTop = $window.scrollTop();
+    });
+  
+      })
+      $('#myModal').on('hide.bs.modal', function (e) {
+        $('#btncalc').show()
+        var $window = $(window), previousScrollTop = 0, scrollLock = false;
+    $window.scroll(function(event) {     
+        if(scrollLock) {
+            $window.scrollTop(previousScrollTop); 
+        }
+    
+        previousScrollTop = $window.scrollTop();
+    });
+          })
 
 async function verifyEmail(data) {
     var email = data.email
@@ -1066,7 +1105,7 @@ async function verifyEmail(data) {
     
                 <div class="col-sm-10">
                 <div class="form-group">
-                     <label for="email"  control-label">
+                     <label for="email"  class="control-label">
                             Enter OTP sent to ${email}</label>
                           
                         <input type="text" id="otp" name="otp" class="form-control" placeholder="Enter OTP" />
@@ -1075,7 +1114,7 @@ async function verifyEmail(data) {
                         </div>
                         </div>
                         <div class="col-sm-12">
-                        <div class="row w-100">
+                        <div class="row">
                         <div class="col-6">
                         <button type="button" id="verifyOTP" class="btn btn-primary" >Verify OTP</button>
                         </div>
@@ -1089,11 +1128,12 @@ async function verifyEmail(data) {
                     display = $('#time');
                 startTimer(fiveMinutes, display, data,'1');
                 
-                $('#verifyOTP').on('click', function (e) {
+                $('#verifyOTP').on('click',async function (e) {
 
+                   var otpchk = await otpcheck($('#otp').val() )
+               
 
-
-                    if ($('#otp').val() == window.atob(res.otp)) {
+                    if (otpchk == true) {
 
                         $.ajax({
                             url: '/users/signup',
@@ -1101,16 +1141,16 @@ async function verifyEmail(data) {
                             data: data,
                             dataType: 'json',
                             success: function (res) {
+                                console.log(res)
+                                if(res.message== 'success'){  
+                                    Swal.fire('Registration Sucessful', '', 'success').then((result)=>{  
+                                        if(result.isConfirmed){  
+                                            location.reload()
+                                        }
+                                    })
+                                }
 
-                                $('#userRegistration').html('')
-                                $('#userRegistration').html(`
-                    
-                    
-                                <div class="col-sm-10">
-                                <h4>Registration successfull</h4>
-                                <a href="/"> click here</a> <p> to login</p>
                                 
-                                `)
                             },
                             error: function (e) {
                                 console.log(e)
@@ -1151,9 +1191,27 @@ async function verifyEmail(data) {
 
 }
 
+async function otpcheck(otp){  
+    status = false
+   var x = await $.ajax({
+        url:'/otpcheck?otp='+otp,
+        method: 'get',
+        success: function (res) {
+            var status = false
+            if(res.message == 'success'){  
+                
+                status = true
+            }
+            else{
+            status = false
+            }
+        }
+    })
+    return true
+}
+
 
 function fetchDist(e) {
-
     $('#district').html(`<option value="">--select--</option>`)
 
     $.ajax({
@@ -1169,7 +1227,15 @@ function fetchDist(e) {
     })
 }
 
+function numberValid(e){ 
+ 
+    
+    var value = $('#'+e.id).val();
+    if(isNaN(value)){  
+        $('#'+e.id).val(value.slice(0, -1))
+    }
 
+}
 
 function fetchConst(e) {
     $('#constituency').html(`<option value="">--select--</option>`)
@@ -1179,6 +1245,7 @@ function fetchConst(e) {
         url: '/fetchConstByDistId?id=' + e.value,
         method: 'get',
         success: function (res) {
+            console.log(res)
             if (res.length != 0) {
                 res.forEach((d) => {
                     $('#constituency').append(`<option value="${d.TCM_Const}">${d.TCM_Const_Name}</option>`)
@@ -1186,7 +1253,7 @@ function fetchConst(e) {
                 })
             }
             else {
-                $('#constituency').append(`<option value="0">${e.innerText}</option>`)
+                $('#constituency').append(``)
             }
 
         }
@@ -1257,7 +1324,7 @@ function fetchConst1(e) {
                 })
             }
             else {
-                $('#constituency1').append(`<option value="0">${e.innerHTML}</option>`)
+                $('#constituency1').append(``)
             }
 
         }
@@ -1276,7 +1343,7 @@ async function
         url: '/users/verifyEmailnMob?email=' + em + '&mobile=' + mob,
         method: 'get',
         success: function (res) {
-
+console.log(res)
           
             if (res.type == 'warning') {
 
@@ -1305,7 +1372,7 @@ async function
 function forgotPass(){
 
     $('#myModal').modal('hide')
-
+    
     $('body').append(`<div class="modal fade" id="forgotpassModal" tabindex="-1" role="dialog" aria-labelledby="calcModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -1317,11 +1384,13 @@ function forgotPass(){
             <div class="modal-body">
             <form>
                 <div id="forgotpassrow" class="row align-items-center text-center">
+                
                     <div class="col-md-12">
+                    <div id="forgotemchk"></div>
                         <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Enter Your Email" id="fpe" placeholder="">
+                        <input type="email" class="form-control" placeholder="Email" id="fpe" placeholder="">
                         <br/>
-                  
+                        <input type="text"  class="form-control" onkeyup="numberValid(this)" placeholder="Mobile Number" id="fpm" placeholder="">
                 <input type="button" id="forgotpassbtn" class="btn btn-primary" value="Send" >
                     </div>
                   
@@ -1340,13 +1409,49 @@ function forgotPass(){
     <!-- End of .modal-dialogue -->
 </div>`)
     $('#forgotpassModal').modal('show')
-$('#forgotpassbtn').on('click',function(){  
-    var email = $('#fpe').val()
-    forgotpassOTP(email)
+$('#forgotpassbtn').on('click',async function(){ 
+    $('#forgotemchk').html('') 
+    var em = $('#fpe').val()
+    var mob = $('#fpm').val()
+   var emchk =await  emailExistfor(em,mob)
+   $('#emailCheck').html('')
+   alert(emchk)
+    if(emchk == true){  
+
+        forgotpassOTP(em)
+    }else{  
+        $('#forgotemchk').html(`
+                    <div class="alert alert-warning">
+        <i class="fa fa-check"></i>
+          <span>Email or Mobile not found</span>
+    </div>`)
+    }
+    
 })
+
+
+
+
+
+  async function emailExistfor(em,mob){  
+    var status = true
     
 
    
+    var x = await $.ajax({
+        url: '/users/emailExistfor?email=' + em + '&mobile=' + mob,
+        method: 'get',
+        success: function (res) { 
+            if(res.message == 'success'){  
+                status = true
+            }else{  
+                status = false
+            }
+         }
+
+    })
+        return status
+   }
 
 }
  function forgotpassOTP(email) {
@@ -1374,17 +1479,20 @@ $('#forgotpassbtn').on('click',function(){
                 
                 `)
 
-                $('#forgotpassotpbtn').on('click',function() {
-                    if($('#fotp').val() == window.atob(res.otp)){  
+                $('#forgotpassotpbtn').on('click', async function() {
+                    var otpchk = await otpcheck($('#fotp').val() )
+               
+
+                    if (otpchk == true) {
                         $('#forgotpassrow').html('')
 
 
                         $('#forgotpassrow').html(`
                 <div class="col-md-12">
                         <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter New Password" id="nfotp" placeholder="">
+                        <input type="password" class="form-control" placeholder="Enter New Password" id="nfotp" placeholder="">
                         <br/>
-                        <input type="text" class="form-control" placeholder="Confirm Password" id="cfotp" placeholder="">
+                        <input type="password" class="form-control" placeholder="Confirm Password" id="cfotp" placeholder="">
                         <br/>
                 <input type="button" id="forgotpassotpcnfbtn" class="btn btn-primary" value="Send" >
                     </div>
@@ -1404,23 +1512,14 @@ $('#forgotpassbtn').on('click',function(){
                             url: '/users/forgotpassword?email=' + email +'&password='+$('#nfotp').val(),
                             method: 'get',
                             success: function (res) {
-                                if(res.message == 'success'){  
-                                    $('#forgotpassrow').html('')
-
-
-                                    $('#forgotpassrow').html(`
-                            <div class="col-md-12">
-                                    <h2>Success</h2>
-                                </div>
                               
-                            
-                                    <!-- End of .member-details -->
-                                </div>
-            
-                            
-                            
-                            `)
-                                }
+                                
+                                    Swal.fire('Reset Password Sucessful', '', 'success').then((result)=>{  
+                                        if(result.isConfirmed){  
+                                            location.reload()
+                                        }
+                                    })
+                                
 
                             }})
                     }
@@ -1491,7 +1590,27 @@ function passwordComp(p, c) {
     }
 }
 
-
+function mobchk (mob,alt){  
+    alert('hi')
+    $('#',+alt).html('')
+    var status = false
+    var val = $('#'+mob).val()
+    if (/^\d{10}$/.test(val)) {
+        // value is ok, use it
+        status = true
+    } else {
+        
+        $('#'+mob).focus()
+        $('#'+alt).html(`
+                    <div class="alert alert-warning">
+        <i class="fa fa-check"></i>
+          <span>Invalid Mobile Number</span>
+    </div>`)
+    status = false
+        
+    }
+    return status
+}
 
 function getTimeRemaining(endtime) {
     const total = Date.parse(endtime) - Date.parse(new Date());

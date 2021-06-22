@@ -89,7 +89,7 @@ router.post('/createVendor', async function (req, res) {
   } catch (e) {
     console.log(e)
   }
-  res.send(result)
+  res.send({ message: result })
 })
 
 router.post('/signup', async function (req, res) {
@@ -100,7 +100,7 @@ router.post('/signup', async function (req, res) {
   } catch (e) {
     console.log(e)
   }
-  res.send({ result: result })
+  res.send({ message: result })
 })
 
 router.get('/verifyEmailnMob', async function (req, res) {
@@ -151,6 +151,54 @@ router.get('/verifyEmailnMob', async function (req, res) {
   }
 });
 
+
+router.get('/emailExistfor', async function (req, res) {
+  var email = req.query.email;
+  var mobile = req.query.mobile
+  var client = new Client(db);
+  console.log(email, mobile)
+  try {
+    client.connect();
+  } catch (e) {
+    res.send('Error while connecting to database');
+  }
+
+  const query = {
+    text: 'select * from login_detail where "Email" = $1 and "Mobile" = $2',
+    values: [email, mobile],
+    rowAsArray: true
+  }
+  try {
+    client.query(query, async (err, resp) => {
+      if (err) {
+        res.send({ error: err });
+        // errorLogger(err,query)
+      } else if (resp) {
+        if (resp.rowCount != 0) {
+          resp.rowAsArray = true;
+          console.log(resp.rows[0])
+          req.session.sessionFlash = {
+            message: "success",
+            type: 'success'
+          }
+          res.send(req.session.sessionFlash);
+        } else {
+          req.session.sessionFlash = {
+            message: "Email or mobile not found",
+            type: 'warning'
+          }
+          res.send(req.session.sessionFlash);
+        }
+
+      }
+
+      await client.end();
+    })
+
+  } catch (e) {
+    res.status(500).send();
+  }
+});
 router.post('/login', async function (req, res) {
   var email = req.body.email;
   var password = base64encode(req.body.password);

@@ -155,7 +155,7 @@ img {
 .btn {
     height: 5rem;
     display: inline-flex;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     line-height: 5rem;
     color:rgb(28,51,92);
     font-weight: 600;
@@ -532,7 +532,7 @@ section,
 
 .hide-loader {
     opacity: 0 !important;
-    transition: all 1s ease;
+    transition: all 7s ease;
     z-index: -99999999999999;
 }
 
@@ -1929,7 +1929,20 @@ button.icon-btn:hover {
     opacity: 1;
 }
 
+.form_rowch{
+    height: 60vh; overflow-y: scroll;
+}
 
+
+.form_rowch::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.form_rowch {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 /* -- Countdown-clock css -- */
 
 .countdown-box {
