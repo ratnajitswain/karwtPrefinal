@@ -2,13 +2,28 @@ var express = require('express');
 var router = express.Router();
 var commonController = require('../src/Controllers/commonController')
 var adminController = require('../src/Controllers/adminController')
-
-
+var jwt = require('jsonwebtoken');
+const { base64encode, base64decode } = require('nodejs-base64');
 /* GET home page. */
 router.get('/',async function(req, res, next) {
+var token = req.cookies.token
+console.log(token)
+if(!token) {
+  console.log('jkujkjhjhghjghjghjghjghjg')
   res.render("index")
-// res.send(states)
+}
+else{
 
+  const decrypt = await jwt.verify(token, process.env.APP_SECRET);
+req.session.userType = decrypt.User_Type;
+req.session.userEmail = decrypt.Email;
+console.log(decrypt)
+let url = {}
+
+  url = '/'+decrypt.User_Type+'/dashboard'
+  res.redirect(url)
+// res.send(states)
+}
 })
 
 
@@ -78,6 +93,7 @@ router.get('/fetchDistByStateId',async function(req, res, next) {
 
  router.get('/otpverify',async function(req, res, next) {
   var response = {}
+  req.session.otp = ""
    try {
     response = await commonController.otpsent(req)
    } catch (e) {
@@ -88,12 +104,15 @@ router.get('/fetchDistByStateId',async function(req, res, next) {
  });
  router.get('/otpcheck',async function(req, res, next) {
   var response = {}
+console.log(req.session.otp==base64encode(req.query.otp))
   try{  
     if(req.session.otp==base64encode(req.query.otp)){  
-      response.message =await 'success'
+      response.message ='success'
+      req.session.otp = ''
+      res.send(response)
     }else{  
-     response.message =await 'failed'
-      
+     response.message = 'failed'
+     res.send(response)
     }
   }
   catch(e){
@@ -101,7 +120,7 @@ router.get('/fetchDistByStateId',async function(req, res, next) {
   }
    
    console.log(response)
-   res.send(response)
+   
  });
 
 

@@ -1207,7 +1207,7 @@ async function otpcheck(otp){
             }
         }
     })
-    return true
+    return status = true
 }
 
 

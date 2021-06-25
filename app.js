@@ -153,14 +153,18 @@ app.use("/admin/**",function(req,res,next){
 app.use('/logout', function(req, res, next) {
 
   if(req.session.userType){
-  
+    
+
       
       req.session.sessionFlash ={
       type:'success',
       message:"Log Out successfull"
     }
+    
     req.session.destroy()
+    res.clearCookie('token');
     res.redirect('/'); 
+    
   }else{
      req.session.sessionFlash ={
       type:'warning',

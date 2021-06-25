@@ -245,27 +245,19 @@ router.post('/login', async function (req, res) {
 
           var userObj = {
             login_detail_id: resp.rows[0].login_detail_id,
-            User_Type: resp.rows[0].User_Type
+            User_Type: resp.rows[0].User_Type,
+            userEmail: resp.rows[0].Email
           }
-          const token = jwt.sign(userObj, process.env.APP_SECRET, { expiresIn: '1h' });
-          req.session.userType = resp.rows[0].User_Type;
-          req.session.userEmail = resp.rows[0].Email;
-          req.session.token = token;
-          let url = {}
-          if (resp.rows[0].User_Type == 'admin') {
-            // res.json({status:"SUCCESS",message:`welcome back ${req.session.userType} userType`,token:token})
-            url = '/admin/dashboard'
+          const token =await jwt.sign(userObj, process.env.APP_SECRET, { expiresIn: '1h' });
+          
+          res.cookie('token', token, {
+            maxAge:1000*60*60*24*24,
+            secure: false, // set to true if your using https
+            httpOnly: true,
+          });
+          
+         let url = '/'
             res.send({ url: url })
-          } else if (resp.rows[0].User_Type == 'user') {
-            url = '/user/dashboard'
-            res.send({ url: url })
-            // res.json({status:"SUCCESS",message:`welcome back ${req.session.userType} userType`,token:token})
-          } else if (resp.rows[0].User_Type == 'vendor') {
-            url = '/vendor/dashboard'
-            res.send({ url: url })
-            // res.json({status:"SUCCESS",message:`welcome back ${req.session.userType} userType`,token:token})
-
-          }
 
         }
       }

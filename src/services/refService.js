@@ -67,10 +67,9 @@ const refService = {
                                                     values: [parseInt(gen3[gen3Id].userid)]
                                                 }
                                                 gen4 = await dbService.execute(query)
-
+                                                
                                                 if (gen4.length != 0) {
-                                                    for(gen4Id=0;gen2Id<gen4.length;gen4Id++) {
-
+                                                    for( gen4Id=0; gen4Id <gen4.length; gen4Id++) {
                                                         try {
                                                             let query = {
                                                                 text: 'select * from fetch_refCount($1)',

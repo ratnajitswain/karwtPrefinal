@@ -70,7 +70,9 @@ const commonController = {
          charactersLength)));
            }
            var otp =  result.join('');
+           console.log('yuryuyfy',req.session)
            req.session.otp = base64encode(otp)
+           
            console.log(otp)
         var transporter = nodemailer.createTransport({
             host: 'mail.karwt.com',
@@ -221,9 +223,9 @@ const commonController = {
 
             if(data.image != ''){
 
-            if(req.session.userType=="user"||req.session.userType=="admin"){  
+            if(req.session.userType=="user" || req.session.userType=="admin"){  
                 let q2 = {  
-                     text:`update tbl_user_mstr set "TUM_User_Name"=$1, "TUM_User_Image"=$2,"TUM_User_State"=$3,"TUM_User_District"=$4, "TUM_User_Constituency"=$5,"TUM_User_Address"=$6,"TUM_User_PINno"=$7,"TUM_User_PINno"=$8 where "TUM_User_Email"=$9`,
+                     text:`update tbl_user_mstr set "TUM_User_Name"=$1, "TUM_User_Image"=$2,"TUM_User_State"=$3,"TUM_User_District"=$4, "TUM_User_Constituency"=$5,"TUM_User_Address"=$6,"TUM_User_PINno"=$7 where "TUM_User_Email"=$8`,
                      values: [data.name,data.image,data.state,data.dist,data.const,data.address,data.pin,req.session.userEmail]
                  }
                 resp = await dbService.execute(q2)
