@@ -31,12 +31,14 @@ const upload = Multer({
 
 router.get('/checkpass', async function (req, res) {
   var result = {}
+  console.log(req.session.userEmail,base64encode(req.query.password))
   try {
     let query = {
       text: 'select * from login_detail where "Email" = $1 and "Password" = $2',
       values: [req.session.userEmail,base64encode(req.query.password)]
     }
     let resp = await dbservice.execute(query)
+    console.log(resp)
     if(resp.length > 0) {  
       result.message = 'success'
     }
@@ -47,6 +49,7 @@ router.get('/checkpass', async function (req, res) {
   } catch (e) {
     console.log(e)
   }
+  console.log(result)
   res.send(result)
 })
 

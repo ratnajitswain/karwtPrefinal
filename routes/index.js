@@ -16,7 +16,7 @@ else{
 
   const decrypt = await jwt.verify(token, process.env.APP_SECRET);
 req.session.userType = decrypt.User_Type;
-req.session.userEmail = decrypt.Email;
+req.session.userEmail = decrypt.userEmail;
 console.log(decrypt)
 let url = {}
 

@@ -226,16 +226,16 @@ const commonController = {
             if(req.session.userType=="user" || req.session.userType=="admin"){  
                 let q2 = {  
                      text:`update tbl_user_mstr set "TUM_User_Name"=$1, "TUM_User_Image"=$2,"TUM_User_State"=$3,"TUM_User_District"=$4, "TUM_User_Constituency"=$5,"TUM_User_Address"=$6,"TUM_User_PINno"=$7 where "TUM_User_Email"=$8`,
-                     values: [data.name,data.image,data.state,data.dist,data.const,data.address,data.pin,req.session.userEmail]
+                     values: [data.name,data.image,parseInt(data.state),parseInt(data.dist),parseInt(data.const),data.address,data.pin,req.session.userEmail]
                  }
-                resp = await dbService.execute(q2)
+                resp = await dbService.executeUpdate(q2)
               }
               if(req.session.userType=="vendor"){  
                 let q2 = {  
                      text:`update tbl_vendor_mstr set "TVM_Vendor_Name"=$1, "TVM_Vendor_Image"=$2,"TVM_Vendor_State"=$3,"TVM_Vendor_District"=$4, "TVM_Vendor_Constituency"=$5,"TVM_Vendor_Address"=$6,"TVM_Vendor_PINno"=$7 where "TVM_Vendor_Email"=$8`,
                      values: [data.name,data.image,data.state,data.dist,data.const,data.address,data.pin,req.session.userEmail]
                  }
-                 resp = await dbService.execute(q2)
+                 resp = await dbService.executeUpdate(q2)
               }
             }
 
@@ -245,20 +245,21 @@ const commonController = {
                      text:`update tbl_user_mstr set "TUM_User_Name"=$1, "TUM_User_State"=$2,"TUM_User_District"=$3, "TUM_User_Constituency"=$4,"TUM_User_Address"=$5,"TUM_User_PINno"=$6 where "TUM_User_Email"=$7`,
                      values: [data.name,data.state,data.dist,data.const,data.address,data.pin,req.session.userEmail]
                  }
-                resp = await dbService.execute(q2)
+                resp = await dbService.executeUpdate(q2)
               }
               if(req.session.userType=="vendor"){  
                 let q2 = {  
                      text:`update tbl_vendor_mstr set "TVM_Vendor_Name"=$1, "TVM_Vendor_State"=$2,"TVM_Vendor_District"=$3, "TVM_Vendor_Constituency"=$4,"TVM_Vendor_Address"=$5,"TVM_Vendor_PINno"=$6 where "TVM_Vendor_Email"=$7`,
                      values: [data.name,data.state,data.dist,data.const,data.address,data.pin,req.session.userEmail]
                  }
-                 resp = await dbService.execute(q2)
+                 resp = await dbService.executeUpdate(q2)
               }
         }
             
         } catch (e) {
             console.log(e)
         }
+        console.log(resp)
         return resp
      }
 
