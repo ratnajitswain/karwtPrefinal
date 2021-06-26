@@ -80,7 +80,9 @@ const vendorController = {
                 values:[id]
             } 
             resp = await dbService.execute(query)
-
+            if(resp[0].userconst=='0'){  
+                resp[0].userconst = resp[0].userdist
+            }
         } catch (e) {
             console.log(e)
         }

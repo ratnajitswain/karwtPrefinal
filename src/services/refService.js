@@ -149,9 +149,14 @@ const refService = {
             gen5Count.push(0)
         }
      
+        let gen1C = gen1Count.reduce((a, b) => a + b, 0)
+        let gen2C = gen2Count.reduce((a, b) => a + b, 0)
+        let gen3C = gen3Count.reduce((a, b) => a + b, 0)
+        let gen4C = gen4Count.reduce((a, b) => a + b, 0)
+        let gen5C = gen5Count.reduce((a, b) => a + b, 0)
      
-        console.log(gen1Count[0], gen2Count[0], gen3Count[0], gen4Count[0], gen5Count[0])
-        return [gen1Count[0], gen2Count[0], gen3Count[0], gen4Count[0], gen5Count[0]]
+       
+        return [gen1C, gen2C, gen3C, gen4C, gen5C]
     },
 
     fetch_refDetailsById: async function (id) {

@@ -16,7 +16,13 @@ const adminController = {
                  values:[]
              } 
              resp = await dbService.execute(query)
- 
+             if(resp){  
+                 resp.forEach(c => {
+                     if(c.userconst=='0'){  
+                         c.userconst = c.userdist
+                     }
+                 });
+             }
          } catch (e) {
              console.log(e)
          }
@@ -35,7 +41,13 @@ const adminController = {
                  values:[]
              } 
              resp = await dbService.execute(query)
- 
+             if(resp){  
+                resp.forEach(c => {
+                    if(c.vendorconst=='0'){  
+                        c.vendorconst = c.vendordist
+                    }
+                });
+            }
          } catch (e) {
              console.log(e)
          }
