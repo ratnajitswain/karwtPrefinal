@@ -22,7 +22,7 @@
     <!-- App Css-->
     <link href="/css/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" herf="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css
     https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" herf="<link rel="stylesheet" herf="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
@@ -73,12 +73,8 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="page-title-box">
-                                <h4>Manage User</h4>
-                                <ol class="breadcrumb m-0">
-
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Manage Vendor</a></li>
-                                    <li class="breadcrumb-item active">Manage Vendor</li>
-                                </ol>
+                                <h4>Manage Vendor</h4>
+                    
                             </div>
                         </div>
 
@@ -110,7 +106,10 @@
 
                                             <thead>
                                                 <tr>
-
+                                                    <th>
+                                                        Joined On
+                                                      
+                                                    </th>
                                                     <th>
                                                         Name
                                                         <i class="fas fa-sort"></i>
@@ -138,6 +137,9 @@
                                                     </th>
                                                     <th>
                                                         GST
+                                                    </th>
+                                                    <th>
+                                                        Referred By
                                                     </th>
 
                                                     <th>
@@ -216,6 +218,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> 
     <script src="//cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script> 
     <script src="//cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script> 
+    <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.colVis.min.js"></script> 
 
 
 
@@ -248,22 +251,22 @@ function active(email, status){
 
                  dom: 'Blfrtip',
             buttons: [      
-                {
-                    extend: 'excelHtml5',
-                    title: 'Vendor List',
-                    text:'Export to Excel' 
-                },
-                {
+            {
+                extend: 'colvis',
+                collectionLayout: 'fixed two-column',
+                text: '<i class="bi bi-table"></i>'
+            },
+            {
                     extend: 'csvHtml5',
                     title: 'Vendor List',                    
-                    text: 'Export to CSV' 
+                    text: '<i class="bi bi-file-earmark-spreadsheet-fill"></i>' 
                 },
                 {
                     extend: 'pdfHtml5',
                     title: 'Vendor List',
-                    className: 'btn_pdf',
-                    text: 'Export to PDF' 
-                }
+                    text: '<i class="bi bi-file-earmark-pdf-fill"></i>',
+                    pageSize: 'A2' 
+                },
 	       ],
                     'columns': [
                  
@@ -301,6 +304,8 @@ function active(email, status){
                      'data': 'vendorproduct'
                  },{
                      'data': 'vendorgst'
+                 },{
+                     'data': 'vendorrefby'
                  },
                  {
                      'data': 'action'

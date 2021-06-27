@@ -22,7 +22,7 @@
     <!-- App Css-->
     <link href="/css/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" herf="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css
     https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" herf="<link rel=" stylesheet"
@@ -74,11 +74,7 @@
                             <div class="col-sm-12">
                                 <div class="page-title-box">
                                     <h4>Manage User</h4>
-                                    <ol class="breadcrumb m-0">
-
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Manage User</a></li>
-                                        <li class="breadcrumb-item active">Manage User</li>
-                                    </ol>
+                                    
                                 </div>
                             </div>
 
@@ -258,15 +254,14 @@
     <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script> 
     
     
-    <script src="//cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script> 
+    <script src="    https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script> 
     <script src="//cdn.datatables.net/buttons/1.6.4/js/buttons.flash.min.js"></script> 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script> 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> 
-    <script src="//cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script> 
-    <script src="//cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script> 
+  <script src="  https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" ></script>
+ <script src="   https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" ></script>
+  <script src="  https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js " ></script>
 
-
+  <script src="  https://cdn.datatables.net/buttons/1.7.1/js/buttons.colVis.min.js " ></script>
 
 
 
@@ -344,29 +339,24 @@ function vendorRefBy(id){ closeUserModal()
              
                 $('#vendorRefModal').modal('show')
             $(`#vendorRefList${id}`).DataTable({
-                    
+                responsive: true,
 
                     data:data,
    
    
                     dom: 'Blfrtip',
                buttons: [      
-                   {
-                       extend: 'excelHtml5',
-                       title: 'Vendor List',
-                       text:'Export to Excel' 
-                   },
-                   {
-                       extend: 'csvHtml5',
-                       title: 'Vendor List',                    
-                       text: 'Export to CSV' 
-                   },
-                   {
-                       extend: 'pdfHtml5',
-                       title: 'Vendor List',
-                       className: 'btn_pdf',
-                       text: 'Export to PDF' 
-                   }
+               {
+                    extend: 'csvHtml5',
+                    title: 'vendor List',                    
+                    text: '<i class="bi bi-file-earmark-spreadsheet-fill"></i>' 
+                },
+                {
+                    extend: 'pdfHtml5',
+                    title: 'Vendor List',
+                    text: '<i class="bi bi-file-earmark-pdf-fill"></i>',
+                    pageSize: 'A2' 
+                },
 
 
               ],
@@ -440,26 +430,26 @@ function vendorRefBy(id){ closeUserModal()
 
                     console.log(data)
                     $('#userList').DataTable({
-
+                        responsive: true,
                         'processing': true,
                         data: data,
                         dom: 'Blfrtip',
             buttons: [      
-                {
-                    extend: 'excelHtml5',
-                    title: 'User List',
-                    text:'Export to Excel' 
-                },
+            {
+                extend: 'colvis',
+                collectionLayout: 'fixed two-column',
+                text: '<i class="bi bi-table"></i>'
+            },
                 {
                     extend: 'csvHtml5',
                     title: 'User List',                    
-                    text: 'Export to CSV' 
+                    text: '<i class="bi bi-file-earmark-spreadsheet-fill"></i>' 
                 },
                 {
                     extend: 'pdfHtml5',
                     title: 'User List',
-                    className: 'btn_pdf',
-                    text: 'Export to PDF' 
+                    text: '<i class="bi bi-file-earmark-pdf-fill"></i>',
+                    pageSize: 'A2' 
                 },
 	       ],
            columnDefs: [{
@@ -689,24 +679,20 @@ function vendorRefBy(id){ closeUserModal()
                     console.log(res)
                     $('#vendorRefModal').modal('show')
                     $(`#userRefList${id}`).DataTable({
+                        responsive: true,
                         data: res,
                         dom: 'Blfrtip',
             buttons: [      
-                {
-                    extend: 'excelHtml5',
-                    title: 'User List',
-                    text:'Export to Excel' 
-                },
-                {
+            {
                     extend: 'csvHtml5',
                     title: 'User List',                    
-                    text: 'Export to CSV' 
+                    text: '<i class="bi bi-file-earmark-spreadsheet-fill"></i>' 
                 },
                 {
                     extend: 'pdfHtml5',
                     title: 'User List',
-                    className: 'btn_pdf',
-                    text: 'Export to PDF' 
+                    text: '<i class="bi bi-file-earmark-pdf-fill"></i>',
+                    pageSize: 'A2' 
                 },
 	       ],
                         'columns': [
@@ -776,23 +762,8 @@ function vendorRefBy(id){ closeUserModal()
 
 
 
- //    function deleteBlog(id){ 
- //     $.ajax({
- //             url: '/admin/deleteBlog?id='+id,
- //             method: 'get',
- //             success: function (res) {
 
-
- //                 console.log(res)
- //             }
- //         })
-
- //     }
-
-     //Method For Searching Records In The List
-     // function searchData() {
-     //     $('#listAllCostCenter').DataTable().draw();
-     // }
+ 
 
 
     </script>
