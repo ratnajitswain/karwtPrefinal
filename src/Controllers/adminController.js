@@ -3,7 +3,7 @@ var refService = require('../services/refService')
 var dbService = require('../../src/services/dbService');
 const { base64encode, base64decode } = require('nodejs-base64');
 const { clearCache } = require('ejs');
-const DateFormatter = require('../Utils/CommonUtils');
+const {DateFormatter} = require('../Utils/CommonUtils');
 
 const adminController = {  
     viewUserList:async function (req, res, next){  
@@ -12,12 +12,13 @@ const adminController = {
          try {
  
              let query = {  
-                 text:'select * from fetch_userList()',
+                 text:'select * from fetch_userList() ORDER BY userjoinedon asc',
                  values:[]
              } 
              resp = await dbService.execute(query)
              if(resp){  
-                 resp.forEach(c => {
+                 resp.forEach(async(c)  => {
+                     c.userjoinedon =await DateFormatter.getStringDate(c.userjoinedon)
                      if(c.userconst=='0'){  
                          c.userconst = c.userdist
                      }
@@ -37,12 +38,13 @@ const adminController = {
          try {
  
              let query = {  
-                 text:'select * from fetch_vendorlist()',
+                 text:'select * from fetch_vendorlist() order by vendorjoinedon asc',
                  values:[]
              } 
              resp = await dbService.execute(query)
              if(resp){  
-                resp.forEach(c => {
+                resp.forEach(async(c) => {
+                    c.vendorjoinedon =await DateFormatter.getStringDate(c.vendorjoinedon)
                     if(c.vendorconst=='0'){  
                         c.vendorconst = c.vendordist
                     }
@@ -74,7 +76,7 @@ const adminController = {
  
         try {
             let today = new Date().toISOString();
-            let dateFunction = await DateFormatter.DateFormatter.getStringDate(today)
+            let dateFunction = await DateFormatter.getStringDate(today)
         
             let query = {  
                 text:`select count(*) from login_detail where "Status" = 0 AND "DeletedFlag" = 0 AND TO_CHAR("CreatedOn" :: DATE, 'dd/mm/yyyy') = $1 AND "User_Type" = $2`,

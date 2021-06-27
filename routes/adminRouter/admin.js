@@ -47,14 +47,14 @@ router.get('/manageVendors',async function (req, res){
       let resp1 = {}
       try {
           let query = {  
-              text:`select * from fetch_userRegdChart('user')`
+              text:`select * from fetch_userRegdChart('user') order by count_date asc`
           }
           resp = await dbService.execute(query)
           resp.forEach((s)=>{  
             s.date = DateFormatter.getStringDate(s.count_date)
         })
           let query1 = {  
-            text:`select * from fetch_userRegdChart('vendor')`
+            text:`select * from fetch_userRegdChart('vendor') order by count_date asc`
         }
         resp1 = await dbService.execute(query1)
         resp1.forEach((s)=>{  

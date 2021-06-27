@@ -150,6 +150,10 @@
                                                 <thead>
                                                     <tr>
                                                         <th>
+                                                            Joined On
+
+                                                        </th>
+                                                        <th>
                                                             Referrals
 
                                                         </th>
@@ -273,7 +277,7 @@
  
     $('#usrlist').hide();
     $('.spinner-border').show();
-    myVar = setTimeout(showPage, 8000);
+    myVar = setTimeout(showPage, 3000);
   
 
 function showPage() {
@@ -463,7 +467,10 @@ function vendorRefBy(id){ closeUserModal()
     "targets": "_all"
   }],
                         'columns': [
+                            {
+                                'data': 'userjoinedon'
 
+                            },
                             {
                                 'data': 'userref'
 
