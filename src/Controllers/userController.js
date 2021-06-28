@@ -3,6 +3,7 @@ var dbService = require('../../src/services/dbService');
 var mailService = require('../../src/services/mailService');
 const { base64encode, base64decode } = require('nodejs-base64');
 const { clearCache } = require('ejs');
+const {DateFormatter} = require('../Utils/CommonUtils')
 const userController = {
 
     createUser: async function (req, res, next) {
@@ -120,6 +121,12 @@ const userController = {
             if(resp[0].userconst=='0'){  
                 resp[0].userconst = resp[0].userdist
             }
+            if(resp){  
+                resp.forEach(async(c)  => {
+                    c.userjoinedon =await DateFormatter.getStringDate(c.userjoinedon)
+                    
+                });
+            }
         } catch (e) {
             console.log(e)
         }
@@ -157,6 +164,13 @@ fetchVendorRefBy: async function(id){
         resp = await dbService.execute(query)
         if(resp[0].vendorconst=='0'){  
             resp[0].vendorconst = resp[0].vendordist
+        }
+
+        if(resp){  
+            resp.forEach(async(c)  => {
+                c.vendorjoinedon =await DateFormatter.getStringDate(c.vendorjoinedon)
+                
+            });
         }
         resp.message = 'success'
 

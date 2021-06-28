@@ -96,7 +96,14 @@ Date Created: May 18, 2018
 
 /* -- Base css
 -------------------------------------- -- */
+.text-content {  
+    text-align: justify;
 
+}
+.benefits-content {  
+    text-align: justify;
+
+}
 html {
     font-size: 10px;
     overflow-x: hidden;

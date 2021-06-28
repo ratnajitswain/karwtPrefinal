@@ -505,6 +505,9 @@
     line-height: 2.2rem; } }
 
 @media screen and (max-width: 575px) {
+  #navbarSupportedContent{  
+    margin-left: 40%;
+  }
   #halfcalc{
     display:block;
     

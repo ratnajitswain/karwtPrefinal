@@ -35,9 +35,9 @@ jQuery(function ($) {
                     <div class="row">
                       <div class="col-12">
                         <!-- Nav tabs -->
-                        <ul class="nav nav-tabs col-12" >
-                          <li class="active"><a href="#Login" data-toggle="tab">Login</a></li>&nbsp&nbsp
-                          <li><a href="#Registration" data-toggle="tab">SignUp</a></li>&nbsp&nbsp
+                        <ul class="nav nav-tabs col-12 d-flex justify-content-between" >
+                          <li class="active"><a href="#Login" data-toggle="tab">Login</a></li>
+                          <li><a href="#Registration" data-toggle="tab">SignUp</a></li>
                            <li><a href="#VRegistration" data-toggle="tab">VendorRegistration</a></li>
                         </ul>
                         <!-- Tab panes -->
@@ -951,7 +951,7 @@ jQuery(function ($) {
                 inner.html(`
                 
                 <img class= "tada" src="/images/KARWT_Psd_fi.png">
-                <img class= "lightSpeedIn" src="/images/karwttext.png">
+                <img style="margin-top:-100px;" class= "lightSpeedIn" src="/images/karwttext.png">
                 
                 `);
                 if (w === 100) {
@@ -1538,13 +1538,14 @@ $('#forgotpassbtn').on('click',async function(){
 })
 }
 function validateAndMsg(arr) {
-    var status = true;
+    var status ;
 
     arr.forEach((id, i) => {
         if (($('#' + id).next()).is('span')) {
             $('#' + id).next("span").remove();
         }
         if ($('#' + id).val() == '' || $('#' + id).val() == null) {
+            status = false;
             let msg = '<span style="color: red">This is a required field.</span>';
             if (!($('#' + id).next()).is('span')) {
                 $('#' + id).after(msg);
@@ -1565,7 +1566,7 @@ function validateAndMsg(arr) {
                     validateAndMsg(ar)
                 })
             }
-            status = false;
+            
         } else {
 
             status = true;

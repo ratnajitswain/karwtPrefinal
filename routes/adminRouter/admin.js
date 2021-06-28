@@ -149,8 +149,8 @@ router.get('/fetchUserList',async function (req, res){
                     }
                     
                 }
-                result[i].totalPoints = parseInt(result[i].gen2to5) + parseInt(result[i].gen1)
-                result[i].userref = '<a href="javascript:void();" onclick="fetch_refDetailsById(\''+result[i].userid+'\')"><i class="fa fa-plus"></i></a>&nbsp&nbsp;<a href="javascript:void();" onclick="vendorRefBy(\''+result[i].userid+'\')"><i class="fas fa-store"></i></a>';
+                result[i].totalPoints = (parseInt(genRefCount[0]) >= 3 ? parseInt(result[i].gen2to5) + parseInt(result[i].gen1) : 0 );
+                result[i].userref = '<a href="javascript:void();" onclick="fetch_refDetailsById(\''+result[i].userid+'\')"><i class="fa fa-plus"></i>&nbsp&nbsp&nbsp</a>&nbsp&nbsp;<a href="javascript:void();" onclick="vendorRefBy(\''+result[i].userid+'\')"><i class="fas fa-store"></i></a>';
 
                 result[i].action = '&nbsp&nbsp;<a href="javascript:void();" onclick="viewUser(\''+result[i].userid+'\')"><i class="fa fa-search"></i></a>'+
                 '&nbsp&nbsp;<a href="javascript:void();" onclick="deleteUser(\''+result[i].useremail+'\')"><i class="fa fa-trash"></i></a>'; 

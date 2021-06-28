@@ -20,7 +20,7 @@ router.get('/dashboard',async function (req, res){
                     result[0].gen4 = genRefCount[3]
                     result[0].gen5 = genRefCount[4]
 
-                    result[0].totalPoints = parseInt(result[0].gen1)+parseInt(result[0].gen2)+parseInt(result[0].gen3)+parseInt(result[0].gen4)+parseInt(result[0].gen5)
+                    result[0].totalPoints = (parseInt(genRefCount[0]) >= 3 ? parseInt(result[0].gen1)+parseInt(result[0].gen2)+parseInt(result[0].gen3)+parseInt(result[0].gen4)+parseInt(result[0].gen5) : 0 );
                     result[0].totalRef = result[0].gen1
                     result[0].refurl = req.headers.host+'/'+result[0].refid
                     
