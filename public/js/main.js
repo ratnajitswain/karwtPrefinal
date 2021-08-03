@@ -23,7 +23,7 @@ jQuery(function ($) {
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
               aria-hidden="true">
               <div class="modal-dialog modal-lg" >
-                <div class="modal-content" style="background-color:#83A6DB;">
+                <div class="modal-content" style="background-color:#00BAF2;">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                       ×</button>
@@ -731,9 +731,9 @@ jQuery(function ($) {
 
     $('#signup').on('click',async function () {
         var arr = ['name', 'email', 'mobile', 'password', 'pin', 'cpassword', 'state', 'district', 'constituency', 'address']
-        var status = validateAndMsg(arr);
+        var status =await validateAndMsg(arr);
         var passcheck = passwordComp('password', 'cpassword');
-
+console.log(status);
 
         if (status == true && passcheck == true) {
             var data = {
@@ -762,14 +762,9 @@ jQuery(function ($) {
 
     })
 
-
-
-
-
-
     $('#signup1').on('click',async function () {
         var arr = ['name1', 'email1', 'mobile1', 'pin1', 'password1', 'cpassword1', 'states1', 'district1', 'constituency1', 'businessName', 'businessType', 'productservice', 'address1']
-        var status = validateAndMsg(arr);
+        var status = await validateAndMsg(arr);
         var passcheck = passwordComp('password1', 'cpassword1');
       
         var gstCheck = true
@@ -1068,27 +1063,9 @@ jQuery(function ($) {
 
     $('#myModal').on('show.bs.modal', function (e) {
     $('#btncalc').hide()
-    
-    var $window = $(window), previousScrollTop = 0, scrollLock = true;
-    $window.scroll(function(event) {     
-        if(scrollLock) {
-            $window.scrollTop(previousScrollTop); 
-        }
-    
-        previousScrollTop = $window.scrollTop();
-    });
-  
-      })
+       });
       $('#myModal').on('hide.bs.modal', function (e) {
         $('#btncalc').show()
-        var $window = $(window), previousScrollTop = 0, scrollLock = false;
-    $window.scroll(function(event) {     
-        if(scrollLock) {
-            $window.scrollTop(previousScrollTop); 
-        }
-    
-        previousScrollTop = $window.scrollTop();
-    });
           })
 
 async function verifyEmail(data) {
@@ -1192,7 +1169,7 @@ async function verifyEmail(data) {
 }
 
 async function otpcheck(otp){  
-    status = false
+   let status = false
    var x = await $.ajax({
         url:'/otpcheck?otp='+otp,
         method: 'get',
@@ -1207,7 +1184,7 @@ async function otpcheck(otp){
             }
         }
     })
-    return status = true
+    return status 
 }
 
 
@@ -1538,7 +1515,7 @@ $('#forgotpassbtn').on('click',async function(){
 })
 }
 function validateAndMsg(arr) {
-    var status ;
+    var status = true ;
 
     arr.forEach((id, i) => {
         if (($('#' + id).next()).is('span')) {
@@ -1568,8 +1545,6 @@ function validateAndMsg(arr) {
             }
             
         } else {
-
-            status = true;
 
             if (($('#' + id).next()).is('span')) {
                 $('#' + id).next("span").remove();

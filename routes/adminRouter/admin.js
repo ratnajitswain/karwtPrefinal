@@ -8,8 +8,10 @@ var refService = require('../../src/services/refService')
 var dbService = require('../../src/services/dbService')
 var userController = require('../../src/Controllers/userController')
 var {DateFormatter} = require('../../src/Utils/CommonUtils')
+
+
 router.get('/dashboard',async function (req, res){  
-let id = req.session.userid
+let id = req.user.id
 let total
 let  total1
 let  total3
@@ -17,28 +19,31 @@ try {
    let result1 =await adminController.getTotalRegisteredUsers();
   let result2 =await adminController.getRegisteredUsersForToday();
   let  result = await userController.fetchUserDetailsById(id)
-  req.session.details = result;
+  let details = result;
+  res.cookie('details', details, {
+   maxAge:1000*60*60*24*24,
+   secure: false, 
+   httpOnly: true,
+ });
   let  result3 =await adminController.viewVendorList()
 total = result1[0].count;
   total1 = result2[0].count;
   total3 = result3.length;
-
-    
-console.log(result1,result2)
+console.log(result1,result2,req.cookies.details)
 } catch (e) {
     console.log(e)
 }
 
 
-    res.render('adminDashboard',{result:req.session.details,totalUsers:total,todayRegistered:total1,totalVendor:total3})
+    res.render('adminDashboard',{result:req.cookies.details,totalUsers:total,todayRegistered:total1,totalVendor:total3})
 })
 
 router.get('/manageUsers',async function (req, res){ 
-  let result =  req.session.details;
+  let result =  req.cookies.details;
     res.render('manageUser',{result:result})
 })
 router.get('/manageVendors',async function (req, res){ 
-    let result =  req.session.details;
+    let result =  req.cookies.details;
     res.render('manageVendor',{result:result})
 })
 
@@ -65,67 +70,8 @@ router.get('/manageVendors',async function (req, res){
       }
 
       let result = [resp,resp1]
-      console.log('&&&&&&&',result)
       res.send(result)
   })
-//   router.get('/fetchUserList',async function (req,res) {
-  
-//   let param1 = req.query.param1;
-//   let draw = req.query.draw;
-//   let start = req.query.start;
-//   let length = req.query.length;
-  
-//   let sql1 = 'select * from tbl_user_mstr where "TUM_User_DeletedFlag"= 0';
-//   if(param1!=null && param1!=''){
-//     sql1+=' and "TUM_User_Name" = \''+param1+'\'';
-//   }
-//   const query1 = {
-//     text: sql1,
-//     rowAsArray: true
-//   }
-//   var result = await dbService.execute(query1);
-//   var total =result.length;
-  
-//   let sql = 'select "TUM_User", "TUM_User_Name", "TUM_User_Email", "TUM_User_Mobile" from tbl_user_mstr where "TUM_User_DeletedFlag"= 0';
-//   if(param1!=null && param1!=''){
-//     sql+=' and "TUM_User_Name" = \''+param1+'\'';
-//   }
-//   sql += 'offset $1 limit $2'; 
-//   const query = {
-//     text: sql,
-//     values:[start,length],
-//     rowAsArray: true
-//   }
-  
-//   var data = await dbService.execute(query);
-//   console.log(data)
-//   if(data.length != 0){  
-//     for(i=0;i<data.length;i++){  
-
-//         let genRefCount = await refService.refCountfetch(data[i].TUM_User)
-//         console.log('RefCount',genRefCount)
-//         if(genRefCount.length != 0 ){  
-//             data[i].gen1 = genRefCount[0]
-//             if(genRefCount[1]!=0){  
-//                 data[i].gen2to5 = genRefCount[1]
-//             }
-//             else{  
-//                 data[i].gen2to5 = 0
-//             }
-            
-//         }
-//         data[i].action = '<a href="javascript:void" onclick= deleteUser(\''+data[i].TUM_User+'\') ><i class="fa fa-trash"></i></a>'+
-
-//                             +'&nbsp;&nbsp <a data-toggle="modal" title="view" href="javascript:void" onclick = viewInModel(\''+data[i].TUM_User+'\') ><i class="fa fa-search"></i></a>'
-//     }
-// }
-//   var users = {data:data};
-//   users.recordsTotal = total;
-//   users.recordsFiltered = total;
-//   users.draw = parseInt(draw);
-//   console.log(users)
-//   res.send(users);
-//   })
 
 router.get('/fetchUserList',async function (req, res){  
   var  result = {}
@@ -170,7 +116,6 @@ router.get('/fetchUserList',async function (req, res){
     } catch (e) {
         console.log(e)
     }
-console.log('**********************',result)
     res.json(result)
 })
 
@@ -368,7 +313,7 @@ router.post('/createBlog',async function (req, res){
  })
  
  router.get('/manageBlogs',function (req,res) {
-    let result =  req.session.details;
+    let result =  req.cookies.details;
     res.render('manageBlog',{result:result});
   })
 

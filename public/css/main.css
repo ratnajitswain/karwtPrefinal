@@ -166,7 +166,7 @@ img {
     line-height: 5rem;
     color:rgb(28,51,92);
     font-weight: 600;
-    background-color: #83A6DB;
+    background-color: #00BAF2;
     border: none;
     padding: 0 4rem;
     -webkit-border-radius: 25px;
@@ -366,7 +366,7 @@ section,
 }
 
 .img-card .img-container {
-    background-color: #83A6DB;
+    background-color: #00BAF2;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
@@ -509,7 +509,7 @@ section,
     left: 0;
     width: 50%;
     height: 100vh;
-    background: #83A6DB;
+    background: #00BAF2;
     transition: all 2s;
 }
 
@@ -1501,7 +1501,7 @@ textarea:focus,
 .form-control:focus {
     color: rgb(255, 255, 255);
     background: rgb(128, 134, 255);
-    /* border-color: #83A6DB; */
+    /* border-color: #00BAF2; */
     outline: none;
     box-shadow: none;
 }
@@ -1871,7 +1871,7 @@ button.icon-btn:hover {
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     border-radius: 10px;
-    background-color: #83A6DB;
+    background-color: #00BAF2;
     background-repeat: repeat-x;
     background-repeat: no-repeat;
     transition: all .5s;
@@ -3536,7 +3536,7 @@ form.footer-form input[type="email"] {
   #clockdiv > div{
     padding: 15px;
     border-radius: 3px;
-    background:#83A6DB;
+    background:#00BAF2;
     display: inline-block;
   }
   
@@ -3565,7 +3565,7 @@ form.footer-form input[type="email"] {
  } */
  
  .navbar-banner{
-    background-color: #83A6DB;
+    background-color: #00BAF2;
 
     height: 120px;
      

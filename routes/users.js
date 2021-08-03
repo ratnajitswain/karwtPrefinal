@@ -1,14 +1,15 @@
 var express = require('express');
 var router = express.Router();
-const { base64encode, base64decode } = require('nodejs-base64');
+const {Decrypt} = require('../src/securityConfig/crypto')
 const { Pool, Client } = require('pg');
 const db = require('../src/Utils/dbConfig');
-var jwt = require('jsonwebtoken');
+const {Authenticate} = require('../src/securityConfig/jwt')
 var dbservice = require('../src/services/dbService')
 var userController = require('../src/Controllers/userController')
 var vendorController = require('../src/Controllers/vendorController')
 var commonController = require('../src/Controllers/commonController')
 var Multer = require('multer');
+var {getToken} = require('../src/securityConfig/jwt')
 var storage = Multer.diskStorage({
   destination: function (req, file, cb) {
     // Uploads is the Upload_folder_name
@@ -29,31 +30,34 @@ const upload = Multer({
 });
 
 
-router.get('/checkpass', async function (req, res) {
+router.get('/checkpass',Authenticate, async function (req, res) {
   var result = {}
-  console.log(req.session.userEmail,base64encode(req.query.password))
   try {
     let query = {
-      text: 'select * from login_detail where "Email" = $1 and "Password" = $2',
-      values: [req.session.userEmail,base64encode(req.query.password)]
+      text: 'select * from login_detail where "Email" = $1',
+      values: [req.user.userEmail]
     }
     let resp = await dbservice.execute(query)
     console.log(resp)
     if(resp.length > 0) {  
-      result.message = 'success'
+      let password =await Decrypt(resp[0].Password)
+      if(password = req.query.password){
+        result.message = 'success'
+      }
+      else{  
+        result.message = 'warning'
+      }
+      
     }
-    else{  
-      result.message = 'warning'
-    }
+    
 
   } catch (e) {
     console.log(e)
   }
-  console.log(result)
   res.send(result)
 })
 
-router.post('/updateProfile', upload.single('profile-image'), async function (req, res) {
+router.post('/updateProfile',Authenticate, upload.single('profile-image'), async function (req, res) {
   var resp = {}
 
   if (req.file) {
@@ -74,7 +78,7 @@ router.post('/updateProfile', upload.single('profile-image'), async function (re
   res.send(resp)
 });
 
-router.get('/forgotpassword', async function (req, res) {
+router.get('/forgotpassword',Authenticate, async function (req, res) {
  
   var result = {}
   try {
@@ -204,7 +208,7 @@ router.get('/emailExistfor', async function (req, res) {
 });
 router.post('/login', async function (req, res) {
   var email = req.body.email;
-  var password = base64encode(req.body.password);
+  let password = req.body.password
   var client = new Client(db);
   console.log(email, password)
   try {
@@ -214,8 +218,8 @@ router.post('/login', async function (req, res) {
   }
 
   const query = {
-    text: 'select * from login_detail where "Email" = $1 and "Password" = $2 and "DeletedFlag"= 0 and "Status" = 0',
-    values: [email, password],
+    text: 'select * from login_detail where "Email" = $1 and "DeletedFlag"= 0 and "Status" = 0',
+    values: [email],
     rowAsArray: true
   }
   try {
@@ -224,8 +228,9 @@ router.post('/login', async function (req, res) {
         res.send({ error: err });
         // errorLogger(err,query)
       } else if (resp) {
-        if (resp.rowCount == 0) {
-          resp.rowAsArray = true;
+        resp.rowAsArray = true;
+        let password1 = await Decrypt(resp.rows[0].Password)
+        if(password != password1) {         
           console.log(resp.rows[0])
           req.session.sessionFlash = {
             message: "Invalid user credentials",
@@ -238,21 +243,18 @@ router.post('/login', async function (req, res) {
 
           try {
             userEmail = await userController.fetchUserDetailsByEmail(resp.rows[0].Email)
-            req.session.userid = userEmail[0].TUM_User
-
 
           } catch (e) {
             console.log(e)
           }
 
-
           var userObj = {
-            login_detail_id: resp.rows[0].login_detail_id,
-            User_Type: resp.rows[0].User_Type,
+            id: userEmail[0].TUM_User,
+            userType: resp.rows[0].User_Type,
             userEmail: resp.rows[0].Email
           }
-          const token =await jwt.sign(userObj, process.env.APP_SECRET, { expiresIn: '1h' });
-          
+          const token =  await getToken(userObj);
+          console.log(token)
           res.cookie('token', token, {
             maxAge:1000*60*60*24*24,
             secure: false, // set to true if your using https

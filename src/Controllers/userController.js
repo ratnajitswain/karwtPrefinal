@@ -1,7 +1,7 @@
 var refService = require('../services/refService')
 var dbService = require('../../src/services/dbService');
 var mailService = require('../../src/services/mailService');
-const { base64encode, base64decode } = require('nodejs-base64');
+const {Encrypt} = require('../../src/securityConfig/crypto')
 const { clearCache } = require('ejs');
 const {DateFormatter} = require('../Utils/CommonUtils')
 const userController = {
@@ -10,24 +10,17 @@ const userController = {
         let user = req.body
         var resp = {}
         valid = []
-
-         
             var ref = req.session.refId
             var refBy = []
-
-            if(ref){  
-                
-    
+            if(ref){
             try {
                 refBy = await refService.fetchRefBy(ref)
             }
             catch (e) {
                 console.log(e)
             }
-
             }
             console.log(ref)
-            
             var refu
             if(refBy.length == 0){  
                refu = 0
@@ -49,7 +42,7 @@ const userController = {
     
             
     
-            let password = base64encode(req.body.password)
+            let password = await Encrypt(req.body.password)
             try {
                 let query = {
                     text: `INSERT INTO public.tbl_user_mstr(
@@ -75,9 +68,6 @@ const userController = {
             }
 
         
-
-     
-        
         return resp;
 
 
@@ -85,7 +75,6 @@ const userController = {
 
     fetchUserDetailsById: async function(id){  
         var resp = {}
- 
         try {
 
             let query = {  
@@ -93,9 +82,6 @@ const userController = {
                 values:[parseInt(id)]
             } 
             resp = await dbService.execute(query)
-
-            
-        
             if(resp[0].userconst=='0'){  
                 resp[0].userconst = resp[0].userdist
             }
@@ -106,7 +92,6 @@ const userController = {
         return resp
     
     }
-
     ,
     fetchUserRefBy: async function(id){  
         var resp = {}

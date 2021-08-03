@@ -7,12 +7,18 @@ router.get('/dashboard',async function (req, res){
   
   var result = {  }
   try {
-    result = await vendorController.fetchVendorDetailsById(req.session.userEmail)
+    result = await vendorController.fetchVendorDetailsById(req.user.userEmail)
     
   } catch (e) {
     console.log(e)
   }
-  req.session.details = result
+  let details = result
+
+  res.cookie('details', details, {
+   maxAge:1000*60*60*24*24,
+   secure: false, 
+   httpOnly: true,
+ });
 console.log(result)
     res.render('vendorDashboard',{result:result})
 
@@ -23,7 +29,7 @@ console.log(result)
 
 router.get('/fetch_vendordetailsbyid',async function (req, res){  
   let  resp={ }
-    let id = req.session.userEmail
+    let id = req.user.userEmail
     try {
         resp = await vendorController.fetchVendorDetailsById(id)
     } catch (e) {

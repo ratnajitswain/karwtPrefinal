@@ -1,6 +1,6 @@
 var refService = require('../services/refService')
 var dbService = require('../../src/services/dbService');
-const { base64encode, base64decode } = require('nodejs-base64');
+const {Encrypt} = require('../../src/securityConfig/crypto')
 const { clearCache } = require('ejs');
 const vendorController = {
 
@@ -39,7 +39,7 @@ const vendorController = {
 
            
  
-           let password = base64encode(req.body.password)
+           let password =await Encrypt(req.body.password)
            try{   
                 let query = {  
                     text:`INSERT INTO public.tbl_vendor_mstr(

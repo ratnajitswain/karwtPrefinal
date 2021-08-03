@@ -3,16 +3,6 @@ var express = require('express');
 var router = express.Router();
 var commonController = require('../../src/Controllers/commonController')
 
-router.get('/blog',async function(req, res, next) {
-
- console.log('$$$$$$$$$$$$$')
-
-var result = req.session.details
-result[0].userType = req.session.userType
-    res.render('blog',{result: result})
-  
-  })
-
 
   router.get('/fetchBlogList',async function(req, res, next) {
 
@@ -52,9 +42,8 @@ result[0].userType = req.session.userType
 
         
     }
-    var result1 = req.session.details
-    result1[0].userType = req.session.userType
-    console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&',result)
+    var result1 = req.cookies.details
+    result1[0].userType = req.user.userType
     res.render('posts',{blog:result,result: result1})
   
   })

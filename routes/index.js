@@ -2,27 +2,21 @@ var express = require('express');
 var router = express.Router();
 var commonController = require('../src/Controllers/commonController')
 var adminController = require('../src/Controllers/adminController')
-var jwt = require('jsonwebtoken');
+var {sign,verify} = require('jsonwebtoken');
 const { base64encode, base64decode } = require('nodejs-base64');
 /* GET home page. */
 router.get('/',async function(req, res, next) {
-var token = req.cookies.token
-console.log(token)
+
+const token = req.cookies.token
 if(!token) {
-  console.log('jkujkjhjhghjghjghjghjghjg')
   res.render("index")
 }
 else{
-
-  const decrypt = await jwt.verify(token, process.env.APP_SECRET);
-req.session.userType = decrypt.User_Type;
-req.session.userEmail = decrypt.userEmail;
-console.log(decrypt)
+let user = await verify(token, process.env.APP_SECRET)
+console.log(user)
 let url = {}
-
-  url = '/'+decrypt.User_Type+'/dashboard'
+  url = '/'+user.userType+'/dashboard'
   res.redirect(url)
-// res.send(states)
 }
 })
 

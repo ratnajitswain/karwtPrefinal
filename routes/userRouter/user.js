@@ -4,8 +4,8 @@ var userController = require('../../src/Controllers/userController')
 var refService = require('../../src/services/refService')
 
 router.get('/dashboard',async function (req, res){  
-
-    let id = req.session.userid
+    let id = req.user.id
+    console.log(id,'lllllllllllllllllll')
     let result = {}
     try {
 
@@ -34,8 +34,12 @@ router.get('/dashboard',async function (req, res){
         
     }
     
-    req.session.details = result;
-
+   let details = result;
+   res.cookie('details', details, {
+    maxAge:1000*60*60*24*24,
+    secure: false, 
+    httpOnly: true,
+  });
     res.render('userDashboard',{result:result})
 })
 
@@ -53,36 +57,34 @@ router.get('/refCount',async function(req, res){
 })
 
 router.get('/fetch_userdetailsbyid',async function (req, res){  
-  let  resp={ }
-    let id = req.session.userid
+    let id = req.user.id
+  let  resp={}
     try {
         resp = await userController.fetchUserDetailsById(id)
     } catch (e) {
-        
+        console.log(e)
     }
     res.send(resp)
 })
 router.get('/fetch_refdetailsById',async function (req, res){  
-    let  resp={ }
-      let id = req.session.userid
+    let id = req.user.id
+    let  resp={}
       try {
           resp = await userController.fetchUserRefBy(id)
       } catch (e) {
-          
+        console.log(e)
       }
       console.log(resp)
       res.send(resp)
   })
-
   router.get('/fetch_vendorrefdetailsById',async function (req, res){  
-    let  resp={ }
-      let id = req.session.userid
+    let id = req.user.id
+    let  resp={}
       try {
           resp = await userController.fetchVendorRefBy(id)
       } catch (e) {
-          
+          console.log(e)
       }
-      console.log(resp)
       res.send(resp)
   })
 
