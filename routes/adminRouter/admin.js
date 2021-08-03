@@ -15,10 +15,11 @@ let id = req.user.id
 let total
 let  total1
 let  total3
+let  result
 try {
    let result1 =await adminController.getTotalRegisteredUsers();
   let result2 =await adminController.getRegisteredUsersForToday();
-  let  result = await userController.fetchUserDetailsById(id)
+   result = await userController.fetchUserDetailsById(id)
   let details = result;
   res.cookie('details', details, {
    maxAge:1000*60*60*24*24,
@@ -29,13 +30,13 @@ try {
 total = result1[0].count;
   total1 = result2[0].count;
   total3 = result3.length;
-console.log(result1,result2,req.cookies.details)
+console.log(result1,result2,result)
 } catch (e) {
     console.log(e)
 }
 
 
-    res.render('adminDashboard',{result:req.cookies.details,totalUsers:total,todayRegistered:total1,totalVendor:total3})
+    res.render('adminDashboard',{result:result,totalUsers:total,todayRegistered:total1,totalVendor:total3})
 })
 
 router.get('/manageUsers',async function (req, res){ 

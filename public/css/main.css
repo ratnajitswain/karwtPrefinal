@@ -97,6 +97,10 @@ Date Created: May 18, 2018
 /* -- Base css
 -------------------------------------- -- */
 .text-content {  
+    text-align: center;
+
+}
+.text-content1 {  
     text-align: justify;
 
 }
@@ -2161,7 +2165,7 @@ button.icon-btn:hover {
 .benefits-content {
     height: 100%;
     border: 2px solid #403aa3;
-    padding: 3rem 3rem 1rem 12.5rem;
+    padding: 2rem;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;

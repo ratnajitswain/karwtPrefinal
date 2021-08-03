@@ -5,7 +5,6 @@ var refService = require('../../src/services/refService')
 
 router.get('/dashboard',async function (req, res){  
     let id = req.user.id
-    console.log(id,'lllllllllllllllllll')
     let result = {}
     try {
 
