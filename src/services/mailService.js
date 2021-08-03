@@ -13,7 +13,7 @@ const mailService = {
             port: 465,
             secure: true, // true for 465, false for other ports
             auth: {
-                user: process.env.EMAIL, // your domain email address
+                user: process.env.EMAIL_USERNAME, // your domain email address
                 pass: process.env.PASS // your password
             }
         });
