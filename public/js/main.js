@@ -1109,8 +1109,9 @@ async function verifyEmail(data) {
 
                    var otpchk = await otpcheck($('#otp').val() )
                
-
+console.log(otpchk)
                     if (otpchk == true) {
+
 
                         $.ajax({
                             url: '/users/signup',
@@ -1174,7 +1175,6 @@ async function otpcheck(otp){
         url:'/otpcheck?otp='+otp,
         method: 'get',
         success: function (res) {
-            var status = false
             if(res.message == 'success'){  
                 
                 status = true
@@ -1182,6 +1182,7 @@ async function otpcheck(otp){
             else{
             status = false
             }
+            console.log(res)
         }
     })
     return status 
@@ -1507,6 +1508,7 @@ $('#forgotpassbtn').on('click',async function(){
                 })
 
                     } else {  
+                        $('#fotp').removeAfter()
                         $('#fotp').after('<span style="color: red">Wrong OTP</span>')
                     }
                 })
@@ -1613,7 +1615,7 @@ function initializeClock(id, endtime) {
 
     function updateClock() {
         const t = getTimeRemaining(endtime);
-
+console.log(endtime)
         daysSpan.innerHTML = t.days;
         hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
         minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
@@ -1628,7 +1630,7 @@ function initializeClock(id, endtime) {
     const timeinterval = setInterval(updateClock, 1000);
 }
 
-const deadline = new Date(Date.parse(new Date()) + 91 * 24 * 60 * 60 * 1000);
+const deadline = new Date(Date.parse(new Date(2021, 10, 1, 3, 24, 0)));
 initializeClock('clockdiv', deadline);
 
 

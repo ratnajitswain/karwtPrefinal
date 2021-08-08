@@ -82,6 +82,7 @@ const userController = {
                 values:[parseInt(id)]
             } 
             resp = await dbService.execute(query)
+            console.log(resp)
             if(resp[0].userconst=='0'){  
                 resp[0].userconst = resp[0].userdist
             }
@@ -103,6 +104,9 @@ const userController = {
                 values:[parseInt(id)]
             } 
             resp = await dbService.execute(query)
+            if(resp.length!=0) {
+
+            
             if(resp[0].userconst=='0'){  
                 resp[0].userconst = resp[0].userdist
             }
@@ -112,6 +116,7 @@ const userController = {
                     
                 });
             }
+        }
         } catch (e) {
             console.log(e)
         }
@@ -147,6 +152,7 @@ fetchVendorRefBy: async function(id){
             values:[parseInt(id)]
         } 
         resp = await dbService.execute(query)
+        if(resp.length!=0) {
         if(resp[0].vendorconst=='0'){  
             resp[0].vendorconst = resp[0].vendordist
         }
@@ -157,8 +163,9 @@ fetchVendorRefBy: async function(id){
                 
             });
         }
-        resp.message = 'success'
-
+        
+    }
+    resp.message = 'success'
     } catch (e) {
         console.log(e)
     }
