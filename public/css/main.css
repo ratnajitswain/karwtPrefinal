@@ -1536,7 +1536,7 @@ input[type="text"]:disabled {
     display: block;
     font-size: 1.8rem;
     line-height: 40px;
-    color: white;
+    color: rgb(163, 162, 162);
     margin: 0;
     cursor: text;
     transition: all .3s;
@@ -1564,7 +1564,7 @@ input[type="text"]:disabled {
     height: 1px;
     display: block;
     opacity: 0.2;
-    background: linear-gradient(135.68deg, #F8A4D8 0%, #6A63FF 100%);
+    background: linear-gradient(135.68deg, #f8a4d8 0%, #6A63FF 100%);
     transition: all .3s;
 }
 
@@ -1577,7 +1577,7 @@ input[type="text"]:disabled {
 .contact-form .form-group.focused label {
     top: -30px;
     font-size: 1.4rem;
-    color: #4FD3D3;
+    color: #215e5e;
 }
 
 .contact-form .form-group.focused::after {
