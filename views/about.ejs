@@ -147,7 +147,7 @@
         <div class="container">
             <div class="purchase-token-banner token-box text-center m-b-40">
                 <h3>Prelunch campaign is ending soon. Get your points today!</h3>
-                <a href="#" class="btn" data-toggle="modal" data-target="#myModal">Register Now</a>
+                <label href="#" class="btn registerbtn" >Register Now</alabel>
             </div>
             <!-- End of .purchase-token-banner -->
         </div>
@@ -162,7 +162,12 @@
  
 <%-include('footer-home')-%>
 
-
+<script>
+    $('.registerbtn').on('click',()=>{
+        $( "body" ).scrollTop( 300 );
+        $('#loginbtnclass').click()
+    })
+</script>
 </body>
 
 </html>

@@ -97,14 +97,15 @@ const adminController = {
          try {
  
              let query = {  
-                 text:'update tbl_user_mstr set "TUM_User_DeletedFlag" = 1 where "TUM_User"=$1',
+                 text:'delete from tbl_user_mstr where "TUM_User_Email"=$1',
                  values:[req.query.id]
              } 
              let query1 = {  
-                text:'update login_detail set "DeletedFlag" = 1 where "Email"=$1',
+                text:'delete from login_detail where "Email"=$1',
                 values:[req.query.id]
             } 
              resp = await dbService.execute(query)
+             resp = await dbService.execute(query1)
  
          } catch (e) {
              console.log(e)
@@ -120,10 +121,15 @@ const adminController = {
          try {
  
              let query = {  
-                 text:'update tbl_vendor_mstr set "TVM_Vendor_DeletedFlag"= 1 where "TVM_Vendor"=$1',
-                 values:[parseInt(req.query.id)]
+                 text:'delete from tbl_vendor_mstr where "TVM_Vendor_Email"=$1',
+                 values:[req.query.id]
              } 
+             let query1 = {  
+                text:'delete from login_detail where "Email"=$1',
+                values:[req.query.id]
+            } 
              resp = await dbService.execute(query)
+             resp = await dbService.execute(query1)
  
          } catch (e) {
              console.log(e)

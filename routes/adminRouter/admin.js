@@ -229,7 +229,7 @@ router.get('/fetchVendorList',async function (req, res){
         if(result.length != 0){  
             result.forEach((i)=>{  
                 i.action = '&nbsp&nbsp;<a href="javascript:void();" onclick="viewVendor(\''+i.vendoremail+'\')"><i class="fa fa-search"></i></a>'+
-                '&nbsp&nbsp;<a href="javascript:void();" onclick="deleteVendor(\''+i.vendorid+'\')"><i class="fa fa-trash"></i></a>';  
+                '&nbsp&nbsp;<a href="javascript:void();" onclick="deleteVendor(\''+i.vendoremail+'\')"><i class="fa fa-trash"></i></a>';  
 
                 if(i.vendorstatus == '0'){  
                     i.status = '<a href="javascript:void();" onclick=active(\''+i.vendoremail+'\',1)><i class="fas fa-toggle-on"></i></a>'

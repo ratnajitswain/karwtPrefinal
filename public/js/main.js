@@ -1393,7 +1393,6 @@ $('#forgotpassbtn').on('click',async function(){
     var mob = $('#fpm').val()
    var emchk =await  emailExistfor(em,mob)
    $('#emailCheck').html('')
-   alert(emchk)
     if(emchk == true){  
 
         forgotpassOTP(em)
@@ -1569,7 +1568,6 @@ function passwordComp(p, c) {
 }
 
 function mobchk (mob,alt){  
-    alert('hi')
     $('#',+alt).html('')
     var status = false
     var val = $('#'+mob).val()
