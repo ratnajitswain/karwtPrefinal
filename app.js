@@ -14,7 +14,7 @@ const compression  = require('compression');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const {Authenticate} = require('./src/securityConfig/jwt')
+const {Authenticate,adminAuthenticate} = require('./src/securityConfig/jwt')
 var app = express();
 
 // view engine setup
@@ -90,7 +90,7 @@ app.use('/login',login)
 
 var adminRouter = require('./routes/adminRouter/admin');
 
-app.use('/admin/',Authenticate,adminRouter)
+app.use('/admin/',adminAuthenticate,adminRouter)
 
 
 
