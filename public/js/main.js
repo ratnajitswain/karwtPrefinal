@@ -21,8 +21,8 @@ jQuery(function ($) {
         
 
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog modal-lg" >
+              aria-hidden="true" style="z-index:999999999">
+              <div class="modal-dialog modal-lg modal-dialog-centered" >
                 <div class="modal-content" style="background-color:#00BAF2;">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">

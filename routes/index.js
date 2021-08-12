@@ -4,6 +4,7 @@ var commonController = require('../src/Controllers/commonController')
 var adminController = require('../src/Controllers/adminController')
 var {sign,verify} = require('jsonwebtoken');
 const { base64encode, base64decode } = require('nodejs-base64');
+const mailService    = require('../src/services/mailService')
 /* GET home page. */
 router.get('/',async function(req, res, next) {
 
@@ -33,17 +34,6 @@ router.get('/contact',async function(req, res, next){
 /* GET home page. */
 
 
-router.get('/fetchBlogs',async function(req, res, next){  
-  let result = []
-  try {
-
-      result =await adminController.fetchBlogList()
-      
-  } catch (e) {
-      console.log(e)
-  }
-  res.send(result)
-})
 
 
 
@@ -59,7 +49,19 @@ router.get('/fetchAllStates',async function(req, res, next) {
  });
 
 
- 
+ router.post('/contactus',async function(req, res) {
+   let resp  = {}
+   try{
+   resp = await mailService.emailsent(
+    { res: req.body },
+    "contact@karwt.com",
+    "./views/contactusemail.ejs"
+  );
+   }catch(e){
+     console.log(e)
+   }
+   res.send(req.body)
+ })
 
 
  

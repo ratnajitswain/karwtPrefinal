@@ -1801,9 +1801,6 @@ button.icon-btn:hover {
     background-color : #e2ffc2
 }
 
-.banner-wrapper {
-     
-}
 
 
 
@@ -1821,7 +1818,6 @@ button.icon-btn:hover {
 /* -- Banner inner css -- */
 
 .banner-wrapper__banner-inner {
-    padding: 4.7rem 0;
     
     background-repeat: repeat-x;
 }
@@ -2930,7 +2926,7 @@ button.icon-btn:hover {
 -------------------------------------- -- */
 
 .about-wrapper {
-    margin-top: 5.9rem;
+    margin-top: 3.9rem;
 }
 
 .about-us {
@@ -3223,7 +3219,7 @@ blockquote p {
 -------------------------------------- -- */
 
 .contact-form-wrapper {
-    margin-top: 5.9rem;
+    margin-top: 3.9rem;
 }
 
 .contact-form {

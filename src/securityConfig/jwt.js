@@ -33,7 +33,7 @@ const adminAuthenticate = async function (req,res,next) {
             if(req.user.userType == 'admin'){
                 next();
             }else{
-                return res.redirect('/logout');
+                return res.redirect('/');
             }
           
         }else{

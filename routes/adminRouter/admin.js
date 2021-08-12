@@ -117,6 +117,7 @@ router.get('/fetchUserList',async function (req, res){
     } catch (e) {
         console.log(e)
     }
+    console.log(result)
     res.json(result)
 })
 
