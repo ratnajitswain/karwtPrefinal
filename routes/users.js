@@ -72,7 +72,17 @@ router.post(
   }
 );
 
-router.get("/forgotpassword", async function (req, res) {
+router.get("/forgotpassword", async function (req, res,next) {
+  var result = {};
+  try {
+    result = await commonController.forgotPass(req, res,next);
+  } catch (e) {
+    console.log(e);
+  }
+  res.send(result);
+});
+
+router.get("/changepassword",Authenticate, async function (req, res) {
   var result = {};
   try {
     result = await commonController.forgotPass(req);
@@ -81,7 +91,6 @@ router.get("/forgotpassword", async function (req, res) {
   }
   res.send(result);
 });
-
 router.post("/createVendor", async function (req, res) {
   var result = {};
   try {

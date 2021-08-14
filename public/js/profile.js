@@ -225,7 +225,7 @@ async function changePass() {
 
                         if (formValue[0] == formValue[1]) {
 
-                            return fetch(`/users/forgotpassword?password=${formValue[1]}`)
+                            return fetch(`/users/changepassword?password=${formValue[1]}`)
                                 .then(response => {
                                     if (!response.ok) {
                                         throw new Error(response.statusText)

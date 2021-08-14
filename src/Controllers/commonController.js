@@ -5,6 +5,7 @@ const { Encrypt, Decrypt } = require("../../src/securityConfig/crypto");
 const { base64encode, base64decode } = require("nodejs-base64");
 const { clearCache } = require("ejs");
 const DateFormatter = require("../Utils/CommonUtils");
+const {Authenticate} = require("../securityConfig/jwt")
 const { parse } = require("dotenv");
 const mailService = require("../services/mailService");
 const commonController = {
@@ -164,9 +165,10 @@ let query = {}
     return resp;
   },
 
-  forgotPass: async function (req, res) {
+  forgotPass: async function (req) {
     let password = await Encrypt(req.query.password);
     if (req.query.email == "" || req.query.email == null) {
+      
       req.query.email = req.user.userEmail;
     }
     var resp = {};
