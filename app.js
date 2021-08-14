@@ -97,7 +97,7 @@ app.use('/admin/',adminAuthenticate,adminRouter)
 //catch 404 and forward to error handler
 app.use(function(req, res, next) {
   console.log(req.url)
-  let ref = (req.url).substring(1)
+  let ref = (req.url).trim().substring(1)
   if(ref.length == 8){  
     console.log(ref)
     req.session.refId = ref 

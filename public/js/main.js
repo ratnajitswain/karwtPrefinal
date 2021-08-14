@@ -21,7 +21,7 @@ jQuery(function ($) {
         
 
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-              aria-hidden="true" style="z-index:999999999">
+              aria-hidden="true">
               <div class="modal-dialog modal-lg modal-dialog-centered" >
                 <div class="modal-content" style="background-color:#00BAF2;">
                   <div class="modal-header">
@@ -1628,7 +1628,7 @@ console.log(endtime)
     const timeinterval = setInterval(updateClock, 1000);
 }
 
-const deadline = new Date(Date.parse(new Date(2021, 10, 1, 3, 24, 0)));
+const deadline = new Date(Date.parse(new Date(2021, 10, 14, 3, 24, 0)));
 initializeClock('clockdiv', deadline);
 
 

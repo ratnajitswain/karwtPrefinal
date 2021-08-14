@@ -28,6 +28,7 @@ const upload = Multer({
 });
 
 router.get("/checkpass", Authenticate, async function (req, res) {
+  console.log(req.query.password)
   var result = {};
   try {
     let query = {
@@ -35,10 +36,9 @@ router.get("/checkpass", Authenticate, async function (req, res) {
       values: [req.user.userEmail],
     };
     let resp = await dbservice.execute(query);
-    console.log(resp);
     if (resp.length > 0) {
       let password = await Decrypt(resp[0].Password);
-      if ((password = req.query.password)) {
+      if ((password == req.query.password)) {
         result.message = "success";
       } else {
         result.message = "warning";
@@ -72,7 +72,7 @@ router.post(
   }
 );
 
-router.get("/forgotpassword", Authenticate, async function (req, res) {
+router.get("/forgotpassword", async function (req, res) {
   var result = {};
   try {
     result = await commonController.forgotPass(req);

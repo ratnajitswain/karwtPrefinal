@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="/js/validate.js"></script>
+    <script>
+      function addMore() {
+        var lengthOfTableRow = $("#tbodyData").children("tr").length;
+        var cloneHtml = $("#myTable tbody tr:first").clone();
+        $("#myTable tbody tr:last").find("td:last").html("");
+        $("#myTable tbody").append($("#myTable tbody tr:first").clone());
+        $("#myTable tbody tr td:last").html("");
+        var addMore =
+          '<button type="button" class="btn btn-success tr_clone_add btn-sm" name="add" onclick="addMore();"><span class="fa fa-plus"></span></button>&nbsp;';
+        var removeMore =
+          '<button type="button" class="btn btn-danger rmv btn-sm" name="Remove"><span class="fa fa-minus"></span></button>';
+
+        $("#myTable tbody tr:last").find("td:last").append(addMore);
+        $("#myTable tbody tr:last").find("td:last").append(removeMore);
+        $("#myTable tbody tr:last").find("#fname").val("");
+        $("#myTable tbody tr:last").find("#lname").val("");
+
+        var editTr = 0;
+
+        if (lengthOfTableRow > editTr) {
+          $("#myTable tbody tr")
+            .eq(lengthOfTableRow - 1)
+            .find("td:last")
+            .append(removeMore);
+        }
+        $("#myTable > tbody > tr").each(function (i) {
+          var textInput = $(this).find("input");
+
+          textInput.eq(0).attr("id", "fname" + i);
+          textInput.eq(1).attr("id", "lname" + i);
+        });
+      }
+      $(document).ready(function () {
+        var lengthOfTableRow = $("#tbodyData").children("tr").length;
+        $(".tbll").on("click", ".rmv", function () {
+          $(this).closest("tr").remove();
+          $("#myTable tbody tr:last").find("td:last").html("");
+          var add =
+            '<button type="button" class="btn btn-success tr_clone_add" name="add" onclick="addMore();"><span class="fa fa-plus"></span></button>&nbsp;';
+          var remove =
+            '<button type="button" class="btn btn-danger rmv" name="Remove"><span class="fa fa-minus"></span></button>';
+
+          if ($("#tbodyData").children("tr").length > 1) {
+            $("#myTable tbody tr:last").find("td:last").append(add);
+            $("#myTable tbody tr:last").find("td:last").append(remove);
+          } else {
+            $("#myTable tbody tr:last").find("td:last").append(add);
+          }
+        });
+      });
+
+      function hello() {
+        $(".text-danger").remove();
+        var dataset = [];
+        $("#tbodyData > tr").each(function () {
+          assign = {};
+          assign["uemail"] = $(this).closest("tr").find(".fname").val();
+          assign["remail"] = $(this).closest("tr").find(".lname").val();
+          dataset.push(assign);
+        });
+
+        function funcLoad() {
+          location.reload();
+        }
+        var fnameValid = false;
+        $(".fname").each(function () {
+          var current_id = $(this).attr("id");
+          if (blankValidation(current_id, "TextField", "Please Enter Email")) {
+            if (checkEmailId(current_id, "Please Valid Email Id")) {
+              fnameValid = true;
+              return true;
+            }
+          }
+        });
+
+        if (fnameValid) {
+          var lnameValid = false;
+          $(".lname").each(function () {
+            var current_id = $(this).attr("id");
+            if (
+              blankValidation(current_id, "TextField", "Please Enter Email")
+            ) {
+              if (checkEmailId(current_id, "Please Valid Email Id")) {
+                lnameValid = true;
+                return true;
+              }
+            }
+          });
+        }
+
+        if (fnameValid && lnameValid) {
+          console.log(dataset);
+          $("#tbodydata").empty();
+          for (var i = 0; i < dataset.length; i++) {
+            var request = $.ajax({
+              url: "/admin/editref",
+              method: "POST",
+              data: dataset[i],
+              dataType: "json",
+              success: function (data) {
+                Swal.fire('Saved!', '', 'success').then((result) => { if (result.isConfirmed) { location.reload(); } })
+              },
+              error: function (data) {
+                $('.validdata').after('<span class="text-danger" style="font-size: 12px">Email Not Found</span>')
+              }
+            });
+          }
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div layout:fragment="content">
+      <div class="content-wrap">
+        <div class="main mrt_20">
+          <div class="container-fluid">
+            <div class="card">
+              <div class="card-body">
+                <div class="basic-elements">
+                  <form action="post" autocomplete="off">
+                    <div class="row validdata">
+                      <div class="col-lg-12">
+                        <!-- id="table-data" -->
+
+                        <table
+                          class="tbll"
+                          id="myTable"
+                          width="100%"
+                          border="0"
+                          cellspacing="1"
+                          cellpadding="5"
+                        >
+                          <thead>
+                            <tr>
+                              <th>Enter User Email</th>
+                              <th>Referral Email</th>
+
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+
+                          <tbody id="tbodyData">
+                            <tr class="tr_clone" th:unless="${Edit}">
+                              <td>
+                                <input
+                                  class="form-control fname"
+                                  id="fname"
+                                  type="text"
+                                  placeholder="First Name"
+                                />
+                              </td>
+                              <td>
+                                <input
+                                  class="form-control lname"
+                                  id="lname"
+                                  type="text"
+                                  placeholder="Last Name"
+                                />
+                              </td>
+                              <td class="d-flex">
+                                <button
+                                  type="button"
+                                  class="btn btn-success tr_clone_add btn-sm"
+                                  name="add"
+                                  onclick="addMore();"
+                                >
+                                  <span class="fa fa-plus"></span></button
+                                >&nbsp;
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="clear: both"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

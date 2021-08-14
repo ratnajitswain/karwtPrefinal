@@ -201,8 +201,6 @@
     margin: 1rem 2rem; }
   .btn-play {
     margin-left: 0; }
-  .section-padding {
-    padding: 4.3rem 0 3rem; }
   .banner {
     height: auto;
     padding: 0; }
@@ -256,7 +254,7 @@
     width: 400px !important;
     height: 400px !important; }
   .about-wrapper {
-    margin-top: 3.1rem; }
+    margin-top: 1.1rem; }
   .purchase-token-banner {
     margin-top: 4.9rem;
     margin-bottom: 3rem; }
@@ -293,7 +291,7 @@
     .banner-wrapper__banner-inner .banner-txt h1 {
       margin-bottom: 0; }
   .contact-form-wrapper {
-    margin-top: 3.7rem; }
+    margin-top: 1.7rem; }
   .contact-form {
     padding: 3rem 2rem;
     margin-bottom: 2.9rem; }

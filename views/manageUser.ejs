@@ -1,232 +1,260 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <!-- Mirrored from themesbrand.com/lexa/layouts/purple/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Apr 2021 13:20:23 GMT -->
 
-
-<!-- Mirrored from themesbrand.com/lexa/layouts/purple/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Apr 2021 13:20:23 GMT -->
-
-<head>
-
+  <head>
     <meta charset="utf-8" />
     <title>Karwt | The Next Generation Ecommerce Platform</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      content="Premium Multipurpose Admin & Dashboard Template"
+      name="description"
+    />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="/icon/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/icon/favicon.ico" type="image/x-icon" />
 
     <!-- Bootstrap Css -->
-    <link href="/css/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link
+      href="/css/css/bootstrap.min.css"
+      id="bootstrap-style"
+      rel="stylesheet"
+      type="text/css"
+    />
     <!-- Icons Css -->
     <link href="/css/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="/css/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <link
+      href="/css/css/app.min.css"
+      id="app-style"
+      rel="stylesheet"
+      type="text/css"
+    />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" herf="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css
-    https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" herf="<link rel=" stylesheet"
-        herf="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css"
-        integrity="sha512-OdEXQYCOldjqUEsuMKsZRj93Ht23QRlhIb8E/X0sbwZhme8eUw6g8q7AdxGJKakcBbv7+/PX0Gc2btf7Ru8cZA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      herf="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css
+    https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css"
+    />
+    <link rel="stylesheet" herf="
+    <link
+      rel=" stylesheet"
+      herf="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css"
+      integrity="sha512-OdEXQYCOldjqUEsuMKsZRj93Ht23QRlhIb8E/X0sbwZhme8eUw6g8q7AdxGJKakcBbv7+/PX0Gc2btf7Ru8cZA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
 
-
-<body data-sidebar="dark" onload="fetchUserList()">
-
+  <body data-sidebar="dark" onload="fetchUserList()">
     <!-- <body data-layout="horizontal" data-topbar="colored"> -->
 
     <!-- Begin page -->
     <div id="layout-wrapper">
+      <%-include('header')-%>
 
+      <!-- ========== Left Sidebar Start ========== -->
+      <div class="vertical-menu">
+        <div data-simplebar class="h-100">
+          <!--- Sidemenu -->
+          <%-include('sidebar')-%>
+          <!-- Sidebar -->
+        </div>
+      </div>
+      <!-- Left Sidebar End -->
 
-
-        <%-include('header')-%>
-       
-
-            <!-- ========== Left Sidebar Start ========== -->
-            <div class="vertical-menu">
-
-                <div data-simplebar class="h-100">
-
-                    <!--- Sidemenu -->
-                    <%-include('sidebar')-%>
-                        <!-- Sidebar -->
+      <!-- ============================================================== -->
+      <!-- Start right Content here -->
+      <!-- ============================================================== -->
+      <div class="main-content">
+        <div class="page-content">
+          <div class="container-fluid">
+            <!-- start page title -->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="page-title-box">
+                  <h4>Manage User</h4>
                 </div>
+              </div>
             </div>
-            <!-- Left Sidebar End -->
 
-
-            <!-- ============================================================== -->
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
-            <div class="main-content">
-                <div class="page-content">
-                    <div class="container-fluid">
-
-
-
-
-
-                        <!-- start page title -->
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="page-title-box">
-                                    <h4>Manage User</h4>
-                                    
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                        <div class="modal fade" id="vendorRefModal" tabindex="-1" role="dialog"
-                        aria-labelledby="userRefModal" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-
-                                <div class="modal-header">
-                                    <button type="button" class="btn btn-danger" onclick="closeVendorModal()"
-                                        aria-hidden="true"><i class="fas fa-times"></i></button>
-                                    <h4 class="modal-title" id="myModalLabel">User List</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-
-                                        <div class="col-12">
-
-
-                                            <div id="vendorReftable" class="table-responsive">
-                                                
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
+            <div
+              class="modal fade"
+              id="vendorRefModal"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="userRefModal"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      onclick="closeVendorModal()"
+                      aria-hidden="true"
+                    >
+                      <i class="fas fa-times"></i>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">User List</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-12">
+                        <div id="vendorReftable" class="table-responsive"></div>
+                      </div>
                     </div>
-                        <!-- end page title -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end page title -->
 
-                        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModal"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content" id="userModalBody">
+            <div
+              class="modal fade"
+              id="userModal"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="userModal"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content" id="userModalBody"></div>
+              </div>
+            </div>
 
-                                </div>
-                            </div>
-                        </div>
+            <div
+              class="modal fade"
+              id="editRef"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      Edit Referrals
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body"><%-include('editref')-%></div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      onclick="hello()"
+                      class="btn btn-primary"
+                    >
+                      Save changes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3">
+                      <h4 class="card-title mb-4">User List</h4>
+                      <button
+                        class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#editRef"
+                      >
+                        Edit Referral
+                      </button>
+                    </div>
 
-                        
-
-                        <div class="row">
-
-                            <div class="col-xl-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-4">User List</h4>
-                                        <!-- <div>
+                    <!-- <div>
                                         <input class="form-control  float left" type="text" placeholder="" name="" id="param1">
 
                                     </div> -->
-                                    <div class="d-flex justify-content-center">
-                                        <div class="spinner-border" role="status">
-                                          <span class="sr-only">Loading...</span>
-                                        </div>
-                                      </div>
-                                        <div class="table-responsive" id = "usrlist">
-                                           
-                                            <table style="width:100%;overflow-x: hidden;" id="userList"
-                                                class="table align-middle table-centered table-vertical table-nowrap mb-1">
-
-                                                <thead>
-                                                    <tr>
-                                                        <th>
-                                                            Joined On
-
-                                                        </th>
-                                                        <th>
-                                                            Referrals
-
-                                                        </th>
-                                                        <th>
-                                                            Name
-                                                            <i class="fas fa-sort"></i>
-                                                        </th>
-                                                        <th>
-                                                            Email
-                                                        </th>
-                                                        <th>
-                                                            Mobile
-                                                        </th>
-                                                        <th>
-                                                            State
-
-                                                        </th>
-                                                        <th>
-                                                            District
-                                                        </th>
-                                                        <th>
-                                                            Constituency
-                                                        </th>
-                                                        <th>
-                                                            PIN Code
-                                                        </th>
-                                                        <th>
-                                                            Gen 1
-                                                        </th>
-                                                        <th>
-                                                         Total Points
-                                                        </th>
-                                                        <th>
-                                                            Referral Id
-                                                           </th>
-                                                        <th>
-                                                           Referred By
-                                                           </th>
-                                                        
-
-                                                        <th>
-                                                            Action
-                                                        </th>
-                                                        <th>
-                                                            Status
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- end row -->
-
-
+                    <div class="d-flex justify-content-center">
+                      <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
                     </div>
-                    <!-- container-fluid -->
+                    <div class="table-responsive" id="usrlist">
+                      <table
+                        style="width: 100%; overflow-x: hidden"
+                        id="userList"
+                        class="
+                          table
+                          align-middle
+                          table-centered table-vertical table-nowrap
+                          mb-1
+                        "
+                      >
+                        <thead>
+                          <tr>
+                            <th>Joined On</th>
+                            <th>Referrals</th>
+                            <th>
+                              Name
+                              <i class="fas fa-sort"></i>
+                            </th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>State</th>
+                            <th>District</th>
+                            <th>Constituency</th>
+                            <th>PIN Code</th>
+                            <th>Gen 1</th>
+                            <th>Total Points</th>
+                            <th>Referral Id</th>
+                            <th>Referred By</th>
+
+                            <th>Action</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+
+                        <tbody></tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
-                <!-- End Page-content -->
-
+              </div>
             </div>
-            <!-- end main content-->
-
+            <!-- end row -->
+          </div>
+          <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+      </div>
+      <!-- end main content-->
     </div>
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
     <!-- Right bar overlay-->
-
 
     <!-- JAVASCRIPT -->
     <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -238,7 +266,6 @@
     <script src="/js/vendor/fontawesome-all.min.js"></script>
     <!--Morris Chart-->
 
-
     <script src="/assets/js/app.js"></script>
 
     <!-- DataTables
@@ -247,46 +274,43 @@
 <!-- DataTables -->
     <!-- <script src="/bower_components/datatables.net/js/jquery.dataTables.min.js"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>	 -->
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="//cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css">
-    
-    
-    <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script> 
-    
-    
-    <script src="    https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script> 
-    <script src="//cdn.datatables.net/buttons/1.6.4/js/buttons.flash.min.js"></script> 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> 
-  <script src="  https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" ></script>
- <script src="   https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" ></script>
-  <script src="  https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js " ></script>
+    <link
+      rel="stylesheet"
+      href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css"
+    />
 
-  <script src="  https://cdn.datatables.net/buttons/1.7.1/js/buttons.colVis.min.js " ></script>
+    <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 
+    <script src="    https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.6.4/js/buttons.flash.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="  https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="   https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="  https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js "></script>
 
+    <script src="  https://cdn.datatables.net/buttons/1.7.1/js/buttons.colVis.min.js "></script>
 
     <script>
+      $("#usrlist").hide();
+      $(".spinner-border").show();
+      myVar = setTimeout(showPage, 3000);
 
-
-
- 
-    $('#usrlist').hide();
-    $('.spinner-border').show();
-    myVar = setTimeout(showPage, 3000);
-  
-
-function showPage() {
-    $('#usrlist').show();
-    $('.spinner-border').hide();
-      
-    }
-function vendorRefBy(id){ closeUserModal()
-    $('#vendorReftable').html('')
-    $.ajax({
-        url:'/admin/fetch_vendorrefdetailsById?id='+ id,
-        method: 'get',
-        success: function(data){
-            $('#vendorReftable').html(`
+      function showPage() {
+        $("#usrlist").show();
+        $(".spinner-border").hide();
+      }
+      function vendorRefBy(id) {
+        closeUserModal();
+        $("#vendorReftable").html("");
+        $.ajax({
+          url: "/admin/fetch_vendorrefdetailsById?id=" + id,
+          method: "get",
+          success: function (data) {
+            $("#vendorReftable").html(`
             
             <table style="width:100%;overflow-x: hidden;" id="vendorRefList${id}"
                                                     class="table align-middle table-centered table-vertical table-nowrap mb-1">
@@ -335,219 +359,204 @@ function vendorRefBy(id){ closeUserModal()
                                                     </tbody>
                                                 </table>
             
-            `)
-             
-                $('#vendorRefModal').modal('show')
-            $(`#vendorRefList${id}`).DataTable({
-                responsive: true,
+            `);
 
-                    data:data,
-   
-   
-                    dom: 'Blfrtip',
-               buttons: [      
-               {
-                    extend: 'csvHtml5',
-                    title: 'vendor List',                    
-                    text: '<i class="bi bi-file-earmark-spreadsheet-fill"></i>' 
+            $("#vendorRefModal").modal("show");
+            $(`#vendorRefList${id}`).DataTable({
+              responsive: true,
+
+              data: data,
+
+              dom: "Blfrtip",
+              buttons: [
+                {
+                  extend: "csvHtml5",
+                  title: "vendor List",
+                  text: '<i class="bi bi-file-earmark-spreadsheet-fill"></i>',
                 },
                 {
-                    extend: 'pdfHtml5',
-                    title: 'Vendor List',
-                    text: '<i class="bi bi-file-earmark-pdf-fill"></i>',
-                    pageSize: 'A2' 
+                  extend: "pdfHtml5",
+                  title: "Vendor List",
+                  text: '<i class="bi bi-file-earmark-pdf-fill"></i>',
+                  pageSize: "A2",
                 },
-
-
               ],
 
-              columnDefs: [{
-    "defaultContent": "NA",
-    "targets": "_all"
-  }],
-                       'columns': [
-                    
-                
-                    {
-                        'data': 'vendorname'
-       
-                    }, {
-                        'data': 'vendoremail'
-                    },
-                    {
-                        'data': 'vendormobile'
-                    }, 
-                    {
-                        'data': 'vendorstate'
-                    }, 
-                    {
-                        'data': 'vendordist'
-                    }, 
-                    {
-                        'data': 'vendorconst'
-                    }, 
-                    {
-                        'data': 'vendorpin'
-                    }, 
-                    {
-                        'data': 'vendorbusinessname'
-                    }, 
-                    {
-                        'data': 'vendorbusinesstype'
-                    }, {
-                        'data': 'vendorproduct'
-                    },
-                    {
-                        'data': 'vendorgst'
-                    }
-       
-                    ]
-   
-                   })
-            }
-        
-    })
- }
-
-        function active(email, status){  
-            
-            $.ajax({  
-                url: '/admin/activeuser?email='+email+'&status='+status,
-                method: 'get',
-                success: function (res){  
-                    Swal.fire('Success','','success').then((result)=>{if(result.isConfirmed){location.reload()}})
-                }
-            })
-        }
-        function fetchUserList() {
-
-
-            $.ajax({
-                url: '/admin/fetchUserList',
-                method: 'get',
-                success: function (data) {
-
-
-                    console.log(data)
-                    $('#userList').DataTable({
-                        responsive: true,
-                        'processing': true,
-                        data: data,
-                        dom: 'Blfrtip',
-            buttons: [      
-            {
-                extend: 'colvis',
-                collectionLayout: 'fixed two-column',
-                text: '<i class="bi bi-table"></i>'
-            },
+              columnDefs: [
                 {
-                    extend: 'csvHtml5',
-                    title: 'User List',                    
-                    text: '<i class="bi bi-file-earmark-spreadsheet-fill"></i>' 
+                  defaultContent: "NA",
+                  targets: "_all",
+                },
+              ],
+              columns: [
+                {
+                  data: "vendorname",
                 },
                 {
-                    extend: 'pdfHtml5',
-                    title: 'User List',
-                    text: '<i class="bi bi-file-earmark-pdf-fill"></i>',
-                    pageSize: 'A2' 
+                  data: "vendoremail",
                 },
-	       ],
-           columnDefs: [{
-    "defaultContent": "-",
-    "targets": "_all"
-  }],
-                        'columns': [
-                            {
-                                'data': 'userjoinedon'
-
-                            },
-                            {
-                                'data': 'userref'
-
-                            },
-                            {
-                                'data': 'username'
-
-                            }, {
-                                'data': 'useremail'
-                            },
-                            {
-                                'data': 'usermobile'
-                            }, {
-                                'data': 'userstate'
-                            }, {
-                                'data': 'userdist'
-                            }, {
-                                'data': 'userconst'
-                            }, {
-                                'data': 'userpin'
-                            }, {
-                                'data': 'gen1'
-                            }
-                            , {
-                                'data': 'totalPoints'
-                            }, {
-                                'data': 'refid'
-                            }, {
-                                'data': 'userrefby'
-                            }
-                            , {
-                                'data': 'action'
-                            },
-                             {
-                                'data': 'status'
-                            }
-
-                        ]
-           
-                     
-
-                    })
-
-
+                {
+                  data: "vendormobile",
                 },
-                error: function (e) {
-                    console.log(e)
-                }
-            })
-
-
-
-
-        }
-
-        function closeVendorModal() {
-            $('#vendorRefModal').modal('hide');
-            $('#vendorRefList').DataTable({paging:false,searching:false}).destroy()
-
-            
-
-            
-
-
-}
-        function closeUserModal() {
-
-            table = $('#userRefList').DataTable({
-                paging: false,
-                searching: false
+                {
+                  data: "vendorstate",
+                },
+                {
+                  data: "vendordist",
+                },
+                {
+                  data: "vendorconst",
+                },
+                {
+                  data: "vendorpin",
+                },
+                {
+                  data: "vendorbusinessname",
+                },
+                {
+                  data: "vendorbusinesstype",
+                },
+                {
+                  data: "vendorproduct",
+                },
+                {
+                  data: "vendorgst",
+                },
+              ],
             });
+          },
+        });
+      }
 
-            table.destroy();
+      function active(email, status) {
+        $.ajax({
+          url: "/admin/activeuser?email=" + email + "&status=" + status,
+          method: "get",
+          success: function (res) {
+            Swal.fire("Success", "", "success").then((result) => {
+              if (result.isConfirmed) {
+                location.reload();
+              }
+            });
+          },
+        });
+      }
+      function fetchUserList() {
+        $.ajax({
+          url: "/admin/fetchUserList",
+          method: "get",
+          success: function (data) {
+            console.log(data);
+            $("#userList").DataTable({
+              responsive: true,
+              processing: true,
+              data: data,
+              dom: "Blfrtip",
+              buttons: [
+                {
+                  extend: "colvis",
+                  collectionLayout: "fixed two-column",
+                  text: '<i class="bi bi-table"></i>',
+                },
+                {
+                  extend: "csvHtml5",
+                  title: "User List",
+                  text: '<i class="bi bi-file-earmark-spreadsheet-fill"></i>',
+                },
+                {
+                  extend: "pdfHtml5",
+                  title: "User List",
+                  text: '<i class="bi bi-file-earmark-pdf-fill"></i>',
+                  pageSize: "A2",
+                },
+              ],
+              columnDefs: [
+                {
+                  defaultContent: "-",
+                  targets: "_all",
+                },
+              ],
+              columns: [
+                {
+                  data: "userjoinedon",
+                },
+                {
+                  data: "userref",
+                },
+                {
+                  data: "username",
+                },
+                {
+                  data: "useremail",
+                },
+                {
+                  data: "usermobile",
+                },
+                {
+                  data: "userstate",
+                },
+                {
+                  data: "userdist",
+                },
+                {
+                  data: "userconst",
+                },
+                {
+                  data: "userpin",
+                },
+                {
+                  data: "gen1",
+                },
+                {
+                  data: "totalPoints",
+                },
+                {
+                  data: "refid",
+                },
+                {
+                  data: "userrefby",
+                },
+                {
+                  data: "action",
+                },
+                {
+                  data: "status",
+                },
+              ],
+            });
+          },
+          error: function (e) {
+            console.log(e);
+          },
+        });
+      }
 
-            $('#userModal').modal('hide')
-            $('#userRefModal').modal('hide');
-        }
-        function viewUser(id) {
-            $.ajax({
-                url: '/admin/fetch_userdetailsbyid?id=' + id,
-                method: 'get',
-                success: function (res) {
+      function closeVendorModal() {
+        $("#vendorRefModal").modal("hide");
+        $("#vendorRefList")
+          .DataTable({ paging: false, searching: false })
+          .destroy();
+      }
+      function closeUserModal() {
+        table = $("#userRefList").DataTable({
+          paging: false,
+          searching: false,
+        });
 
-                    console.log(res)
-                    $('#userModal').modal('show');
-                    $('#userModalBody').html('')
-                    $('#userModalBody').html(`
+        table.destroy();
+
+        $("#userModal").modal("hide");
+        $("#userRefModal").modal("hide");
+      }
+      function viewUser(id) {
+        $.ajax({
+          url: "/admin/fetch_userdetailsbyid?id=" + id,
+          method: "get",
+          success: function (res) {
+            console.log(res);
+            $("#userModal").modal("show");
+            $("#userModalBody").html("");
+            $("#userModalBody").html(`
                 
                 
                 <div class="modal-header">
@@ -597,31 +606,22 @@ function vendorRefBy(id){ closeUserModal()
                 
                 
                 
-                `)
+                `);
+          },
+          error: function (e) {
+            console.log(e);
+          },
+        });
+      }
 
+      function fetch_refDetailsById(id) {
+        $("#vendorReftable").html("");
 
-
-                },
-                error: function (e) {
-                    console.log(e)
-                }
-            })
-
-
-
-
-        }
-
-
-        function fetch_refDetailsById(id) {
-            $('#vendorReftable').html('')
-            
-            $.ajax({
-                url: '/admin/fetch_refDetailsById?id=' + id,
-                method: 'get',
-                success: function (res) {
-
-                    $('#vendorReftable').html(`
+        $.ajax({
+          url: "/admin/fetch_refDetailsById?id=" + id,
+          method: "get",
+          success: function (res) {
+            $("#vendorReftable").html(`
                     
                     <table style="width:100%;overflow-x: hidden;" id="userRefList${id}"
                                                         class="table align-middle table-centered table-vertical table-nowrap mb-1">
@@ -675,106 +675,104 @@ function vendorRefBy(id){ closeUserModal()
 
                                                         </tbody>
                                                     </table>
-                    `)
-                    console.log(res)
-                    $('#vendorRefModal').modal('show')
-                    $(`#userRefList${id}`).DataTable({
-                        responsive: true,
-                        data: res,
-                        dom: 'Blfrtip',
-            buttons: [      
-            {
-                    extend: 'csvHtml5',
-                    title: 'User List',                    
-                    text: '<i class="bi bi-file-earmark-spreadsheet-fill"></i>' 
+                    `);
+            console.log(res);
+            $("#vendorRefModal").modal("show");
+            $(`#userRefList${id}`).DataTable({
+              responsive: true,
+              data: res,
+              dom: "Blfrtip",
+              buttons: [
+                {
+                  extend: "csvHtml5",
+                  title: "User List",
+                  text: '<i class="bi bi-file-earmark-spreadsheet-fill"></i>',
                 },
                 {
-                    extend: 'pdfHtml5',
-                    title: 'User List',
-                    text: '<i class="bi bi-file-earmark-pdf-fill"></i>',
-                    pageSize: 'A2' 
+                  extend: "pdfHtml5",
+                  title: "User List",
+                  text: '<i class="bi bi-file-earmark-pdf-fill"></i>',
+                  pageSize: "A2",
                 },
-	       ],
-                        'columns': [
-
-                            {
-                                'data': 'userref'
-
-                            },
-                            {
-                                'data': 'username'
-
-                            }, {
-                                'data': 'useremail'
-                            },
-                            {
-                                'data': 'usermobile'
-                            }, {
-                                'data': 'userstate'
-                            }, {
-                                'data': 'userdist'
-                            }, {
-                                'data': 'userconst'
-                            }, {
-                                'data': 'userpin'
-                            }, {
-                                'data': 'gen1'
-                            }
-                            , {
-                                'data': 'totalPoints'
-                            }
-                    
-                           
-
-                        ],
-
-                    })
-
-
+              ],
+              columns: [
+                {
+                  data: "userref",
                 },
-                error: function (e) {
-                    console.log(e)
-                }
-            })
-
-
-
-        }
-        function closeuserRefModal() {
-            $('#userRefModal').modal('hide');
-        }
-        function deleteUser(id) {
+                {
+                  data: "username",
+                },
+                {
+                  data: "useremail",
+                },
+                {
+                  data: "usermobile",
+                },
+                {
+                  data: "userstate",
+                },
+                {
+                  data: "userdist",
+                },
+                {
+                  data: "userconst",
+                },
+                {
+                  data: "userpin",
+                },
+                {
+                  data: "gen1",
+                },
+                {
+                  data: "totalPoints",
+                },
+              ],
+            });
+          },
+          error: function (e) {
+            console.log(e);
+          },
+        });
+      }
+      function closeuserRefModal() {
+        $("#userRefModal").modal("hide");
+      }
+      function deleteUser(id,name) {
+        Swal.fire({
+          title: "Do you want to Delete?",
+          icon:'question',
+          text: id,
+          showCancelButton: true,
+          confirmButtonText: `Delete`
+        }).then((result) => {
+          if (result.isConfirmed) {
             $.ajax({
-                url: '/admin/deleteUserById?id=' + id,
-                method: 'get',
-                success: function (res) {
+              url: "/admin/deleteUserById?id=" + id,
+              method: "get",
+              success: function (res) {
+                Swal.fire("Deleted!", "", "success").then((result) => {
+                  if (result.isConfirmed) {
                     location.reload();
-
-
-
-                },
-                error: function (e) {
-                    console.log(e)
-                }
-            })
-
-        }
-
-
-
-
- 
-
-
+                  }
+                });
+              },
+              error: function (e) {
+                console.log(e);
+              },
+            });
+          }
+        });
+      }
     </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
-integrity="sha512-RXf+QSDCUQs5uwRKaDoXt55jygZZm2V++WUZduaU/Ui/9EGp3f/2KZVahFZBKGH0s774sd3HmrhUy+SgOFQLVQ=="
-crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/profile.js"></script>
-</body>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+      integrity="sha512-RXf+QSDCUQs5uwRKaDoXt55jygZZm2V++WUZduaU/Ui/9EGp3f/2KZVahFZBKGH0s774sd3HmrhUy+SgOFQLVQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="/js/profile.js"></script>
+  </body>
 
-
-<!-- Mirrored from themesbrand.com/lexa/layouts/purple/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Apr 2021 13:20:47 GMT -->
-
+  <!-- Mirrored from themesbrand.com/lexa/layouts/purple/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Apr 2021 13:20:47 GMT -->
 </html>
