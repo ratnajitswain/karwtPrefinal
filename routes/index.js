@@ -5,7 +5,28 @@ var adminController = require('../src/Controllers/adminController')
 var {sign,verify} = require('jsonwebtoken');
 const { base64encode, base64decode } = require('nodejs-base64');
 const mailService    = require('../src/services/mailService')
+const refService = require('../src/services/refService')
+const dbService = require('../src/services/dbService')
 /* GET home page. */
+
+router.get('/updaterefs',async function(req, res, next){
+  let resp = {}
+try{
+let query = {
+  text:'select  "TUM_User_Email" from tbl_user_mstr',
+  values:[]
+}
+resp = await dbService.execute(query)
+console.log(resp)
+for(var i = 0;i<resp.length;i++){
+  let ref = await refService.referralUpdatePoints(resp[i].TUM_User_Email)
+}
+}catch(e){
+  console.log(e)
+}
+return res.send(resp)
+})
+
 router.get('/',async function(req, res, next) {
 
 const token = req.cookies.token

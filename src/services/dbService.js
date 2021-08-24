@@ -8,7 +8,7 @@ const dbService = {
 	/*** EXCECUTE ANY SELECT STATEMENT ***/
 
 	execute:async function(query){
-		let client = new Client(db);
+		let client = new Client(db, {statement_timeout: 1000000000000000000000000000000000000});
 		try {
 		   client.connect();
 		} catch (e) {

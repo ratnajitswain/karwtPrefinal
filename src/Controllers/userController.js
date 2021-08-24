@@ -59,7 +59,8 @@ const userController = {
                         values: [user.email,user.mobile, password, 'user']
                     }
                     let resp1 = await dbService.executeUpdate(query1)
-                    let resp2 = await mailService.sentEmail({email:user.email,message:'Dear '+user.name+',<br>Welcome to <h2>Karwt</h2> family.'})
+                    // let resp2 = await mailService.sentEmail({email:user.email,message:'Dear '+user.name+',<br>Welcome to <h2>Karwt</h2> family.'})
+                    let refPointUpdate = await refService.referralUpdatePoints(user.email)
                     resp.message = 'success'
                 }
                 

@@ -84,23 +84,16 @@ router.get("/fetchUserList", async function (req, res) {
     console.log(result);
     if (result.length != 0) {
       for (i = 0; i < result.length; i++) {
-        let genRefCount = await refService.refCountfetch(result[i].userid);
-
-        if (genRefCount.length != 0) {
-          result[i].gen1 = genRefCount[0];
-          if (genRefCount[1] != 0) {
             result[i].gen2to5 =
-              parseInt(genRefCount[1]) +
-              parseInt(genRefCount[2]) +
-              parseInt(genRefCount[3]) +
-              parseInt(genRefCount[4]);
-          } else {
-            result[i].gen2to5 = 0;
-          }
-        }
+              parseInt(result[i].gen2) +
+              parseInt(result[i].gen3) +
+              parseInt(result[i].gen4) +
+              parseInt(result[i].gen5);
+          
+        
         result[i].totalPoints =
-          parseInt(genRefCount[0]) >= 3
-            ? parseInt(result[i].gen2to5) + parseInt(result[i].gen1)
+          parseInt(result[i].gen1) >= 3
+            ? result[i].total
             : 0;
         result[i].userref =
           '<a href="javascript:void();" onclick="fetch_refDetailsById(\'' +
@@ -162,22 +155,19 @@ router.get("/fetch_refDetailsById", async function (req, res) {
 
     if (result.length != 0) {
       for (i = 0; i < result.length; i++) {
-        let genRefCount = await refService.refCountfetch(result[i].userid);
-
-        if (genRefCount.length != 0) {
-          result[i].gen1 = genRefCount[0];
-          if (genRefCount[1] != 0) {
+       
             result[i].gen2to5 =
-              parseInt(genRefCount[1]) +
-              parseInt(genRefCount[2]) +
-              parseInt(genRefCount[3]) +
-              parseInt(genRefCount[4]);
-          } else {
-            result[i].gen2to5 = 0;
-          }
-        }
+              parseInt(result[i].gen2) +
+              parseInt(result[i].gen3) +
+              parseInt(result[i].gen4) +
+              parseInt(result[i].gen5);
+        
+        
         result[i].totalPoints =
-          parseInt(result[i].gen2to5) + parseInt(result[i].gen1);
+        result[i].totalPoints =
+          parseInt(result[i].gen1) >= 3
+            ? result[i].total
+            : 0;
         result[i].userref =
           '<a href="javascript:void();" onclick="fetch_refDetailsById(\'' +
           result[i].userid +
@@ -397,30 +387,30 @@ router.post("/imageUpload", upload.single("upload"), async function (req, res) {
   res.send({ url: url });
 });
 
-router.post("/editref", async (req, res) => {
-    let resp = {}
-  try {
-    let query = {
-        text:'select "TUM_User" from tbl_user_mstr where "TUM_User_Email"=$1 or "TUM_User_Email"=$2 ORDER BY "TUM_User_CreatedOn"',
-        values:[req.body.uemail,req.body.remail]
-    }
-    resp = await dbService.execute(query)
-    console.log(resp)
-    if(resp.length != 2){
-        res.status(401).send('Email not found')
-    }
-    else{
+// router.post("/editref", async (req, res) => {
+//     let resp = {}
+//   try {
+//     let query = {
+//         text:'select "TUM_User" from tbl_user_mstr where "TUM_User_Email"=$1 or "TUM_User_Email"=$2 ORDER BY "TUM_User_CreatedOn"',
+//         values:[req.body.uemail,req.body.remail]
+//     }
+//     resp = await dbService.execute(query)
+//     console.log(resp)
+//     if(resp.length != 2){
+//         res.status(401).send('Email not found')
+//     }
+//     else{
         
-        let query1 = {
-            text:'update tbl_user_mstr set "TUM_User_Ref_By"=$1 where "TUM_User"=$2',
-            values: [parseInt(resp[0].TUM_User),parseInt(resp[1].TUM_User)]
-        }
-        resp = await dbService.execute(query1)
-        res.status(200)
-    }
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
+//         let query1 = {
+//             text:'update tbl_user_mstr set "TUM_User_Ref_By"=$1 where "TUM_User"=$2',
+//             values: [parseInt(resp[0].TUM_User),parseInt(resp[1].TUM_User)]
+//         }
+//         resp = await dbService.execute(query1)
+//         res.status(200)
+//     }
+//   } catch (err) {
+//     res.status(500).send(err);
+//   }
+// });
 
 module.exports = router;
